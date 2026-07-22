@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nova — Premium Demo</title>
+<meta name="description" content="Démonstration premium avec effet wow immédiat." />
+
+<link rel="stylesheet" href="assets/css/fonts.css" />
+<link rel="stylesheet" href="assets/css/tailwind.css" />
+
+<style>
+  html, body { background: #05060a; }
+  ::selection { background: #8B5CF6; color: #fff; }
+
+  .word { display: inline-block; overflow: hidden; }
+  .word > span { display: inline-block; will-change: transform, opacity; }
+
+  .glass {
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.09);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    opacity: 0.55;
+    will-change: transform;
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    z-index: 60;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .card-tilt { transform-style: preserve-3d; transition: transform 0.2s ease-out; }
+
+  .btn-magnetic { transition: transform 0.25s cubic-bezier(0.16,1,0.3,1); }
+
+  .marquee-track { animation: marquee 28s linear infinite; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .glow-text .word > span {
+    background: linear-gradient(90deg, #fff 0%, #C7B9FF 45%, #FF9DB0 100%);
+    background-attachment: fixed;
+    background-size: 100vw 100vh;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+
+<body class="bg-bg text-white font-sans antialiased overflow-x-hidden selection:bg-accent">
+
+<div class="noise"></div>
+
+<!-- Skip link -->
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Aller au contenu</a>
+
+<!-- NAV -->
+<header class="fixed top-0 inset-x-0 z-50">
+  <nav class="mx-auto max-w-7xl px-6 mt-4">
+    <div class="glass rounded-2xl px-5 py-3 flex items-center justify-between shadow-2xl shadow-black/40">
+      <a href="#" class="flex items-center gap-2 font-display text-lg tracking-tight" aria-label="Nova, accueil">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-accent2 grid place-items-center text-sm font-bold">N</span>
+        Nova
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm text-muted">
+        <a href="#features" class="hover:text-white transition-colors duration-200">Fonctionnalités</a>
+        <a href="#showcase" class="hover:text-white transition-colors duration-200">Showcase</a>
+        <a href="#testimonials" class="hover:text-white transition-colors duration-200">Avis</a>
+        <a href="#pricing" class="hover:text-white transition-colors duration-200">Tarifs</a>
+      </div>
+      <a href="#cta" class="btn-magnetic cursor-pointer inline-flex items-center gap-2 rounded-full bg-white text-bg text-sm font-semibold px-5 py-2.5 hover:scale-[1.03] active:scale-95">
+        Démarrer
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center pt-32 pb-24 px-6 overflow-hidden">
+    <div class="blob w-[32rem] h-[32rem] bg-accent -top-24 -left-24" data-blob="1"></div>
+    <div class="blob w-[28rem] h-[28rem] bg-accent2 top-40 right-0" data-blob="2"></div>
+    <div class="blob w-[24rem] h-[24rem] bg-indigo-500 bottom-0 left-1/3" data-blob="3"></div>
+
+    <div class="relative mx-auto max-w-5xl text-center">
+      <div class="hero-badge inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-xs text-muted mb-8 opacity-0">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        Nouvelle version disponible aujourd'hui
+      </div>
+
+      <h1 class="hero-headline font-display text-5xl sm:text-6xl md:text-7xl leading-[1.05] tracking-tight mb-6">
+        <span class="block glow-text"><span class="word">Créez</span> <span class="word">un</span> <span class="word">effet</span></span>
+        <span class="block glow-text"><span class="word">wow</span> <span class="word">dès</span> <span class="word">la</span> <span class="word">première</span></span>
+        <span class="block glow-text"><span class="word">seconde.</span></span>
+      </h1>
+
+      <p class="hero-sub max-w-xl mx-auto text-muted text-lg mb-10 opacity-0">
+        Une démonstration premium : animations fluides, profondeur, glow —
+        pensée pour capter l'attention avant même le premier scroll.
+      </p>
+
+      <div class="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0">
+        <a href="#cta" class="btn-magnetic cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent2 px-7 py-3.5 font-semibold shadow-[0_0_40px_-10px_rgba(139,92,246,0.8)] hover:shadow-[0_0_60px_-8px_rgba(139,92,246,0.9)] hover:scale-[1.03] active:scale-95 transition-all duration-300">
+          Voir la démo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3z"/></svg>
+        </a>
+        <a href="#features" class="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full glass px-7 py-3.5 font-semibold hover:bg-white/10 transition-colors duration-200">
+          Explorer
+        </a>
+      </div>
+
+      <div class="hero-stats mt-16 grid grid-cols-3 gap-6 max-w-lg mx-auto opacity-0">
+        <div>
+          <p class="font-display text-3xl" data-count="98">0</p>
+          <p class="text-xs text-muted mt-1">Score Lighthouse</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl"><span data-count="12">0</span>k+</p>
+          <p class="text-xs text-muted mt-1">Utilisateurs actifs</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl"><span data-count="60">0</span>fps</p>
+          <p class="text-xs text-muted mt-1">Animations fluides</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="#logos" aria-label="Défiler vers le bas" class="scroll-cue absolute bottom-8 left-1/2 -translate-x-1/2 text-muted opacity-0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-bounce"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- LOGOS -->
+  <section id="logos" class="relative border-y border-white/5 py-8 overflow-hidden">
+    <p class="text-center text-xs uppercase tracking-widest text-muted mb-6">Ils nous font confiance</p>
+    <div class="flex overflow-hidden mask-fade">
+      <div class="marquee-track flex items-center gap-16 pr-16 shrink-0 text-2xl font-display text-white/25">
+        <span>Orbitly</span><span>Lumen</span><span>Fractal</span><span>Nexus</span><span>Aeon</span><span>Vantage</span><span>Prism</span>
+      </div>
+      <div class="marquee-track flex items-center gap-16 pr-16 shrink-0 text-2xl font-display text-white/25" aria-hidden="true">
+        <span>Orbitly</span><span>Lumen</span><span>Fractal</span><span>Nexus</span><span>Aeon</span><span>Vantage</span><span>Prism</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="relative py-28 px-6">
+    <div class="mx-auto max-w-6xl">
+      <div class="reveal max-w-xl mb-16">
+        <p class="text-accent2 text-sm font-semibold mb-3 uppercase tracking-wider">Fonctionnalités</p>
+        <h2 class="font-display text-4xl md:text-5xl leading-tight">Chaque détail compte</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        <article class="reveal card-tilt glass rounded-3xl p-8 md:col-span-2 md:row-span-2 relative overflow-hidden group">
+          <div class="absolute -top-10 -right-10 w-48 h-48 bg-accent/30 rounded-full blur-3xl group-hover:bg-accent/50 transition-colors duration-500"></div>
+          <div class="relative">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-accent to-accent2 grid place-items-center mb-6">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+            </div>
+            <h3 class="font-display text-2xl mb-3">Animations instantanées</h3>
+            <p class="text-muted leading-relaxed max-w-md">Chaque interaction répond en moins de 200ms. Le mouvement guide l'œil et donne une impression de fluidité totale, sans jamais distraire de l'objectif.</p>
+          </div>
+        </article>
+
+        <article class="reveal card-tilt glass rounded-3xl p-8 relative overflow-hidden group">
+          <div class="w-11 h-11 rounded-xl bg-white/10 grid place-items-center mb-6">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <h3 class="font-display text-xl mb-2">Prêt en secondes</h3>
+          <p class="text-muted text-sm leading-relaxed">Un seul fichier, aucune dépendance à installer.</p>
+        </article>
+
+        <article class="reveal card-tilt glass rounded-3xl p-8 relative overflow-hidden group">
+          <div class="w-11 h-11 rounded-xl bg-white/10 grid place-items-center mb-6">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 9h6v6H9z"/></svg>
+          </div>
+          <h3 class="font-display text-xl mb-2">100% responsive</h3>
+          <p class="text-muted text-sm leading-relaxed">Mobile, tablette, desktop — même impact partout.</p>
+        </article>
+
+        <article class="reveal card-tilt glass rounded-3xl p-8 relative overflow-hidden group md:col-span-2">
+          <div class="w-11 h-11 rounded-xl bg-white/10 grid place-items-center mb-6">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 4.5l6 6M13.5 13.5l6 6M20.5 4.5l-6 6M10.5 13.5l-6 6"/></svg>
+          </div>
+          <h3 class="font-display text-xl mb-2">Accessible par défaut</h3>
+          <p class="text-muted text-sm leading-relaxed max-w-md">Contrastes AA, navigation clavier, et respect de <code class="font-mono text-xs bg-white/10 px-1.5 py-0.5 rounded">prefers-reduced-motion</code> pour désactiver les animations si besoin.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE -->
+  <section id="showcase" class="relative py-28 px-6 border-t border-white/5">
+    <div class="mx-auto max-w-6xl grid md:grid-cols-2 gap-16 items-center">
+      <div class="reveal">
+        <p class="text-accent2 text-sm font-semibold mb-3 uppercase tracking-wider">Showcase</p>
+        <h2 class="font-display text-4xl leading-tight mb-6">Une profondeur qui se ressent au scroll</h2>
+        <p class="text-muted leading-relaxed mb-8">Les éléments se dévoilent progressivement, à des vitesses différentes, pour créer une sensation de profondeur — sans jamais ralentir la page.</p>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-accent/20 text-accent grid place-items-center shrink-0"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
+            <span class="text-sm text-muted">Parallaxe multi-couches en scrub avec ScrollTrigger</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-accent/20 text-accent grid place-items-center shrink-0"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
+            <span class="text-sm text-muted">Cartes avec tilt 3D réactif au curseur</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-accent/20 text-accent grid place-items-center shrink-0"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
+            <span class="text-sm text-muted">Dégradés animés en arrière-plan (aurora)</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="relative h-[420px] reveal" aria-hidden="true">
+        <div class="parallax-layer absolute inset-0 rounded-3xl glass" style="z-index:1"></div>
+        <div class="parallax-layer absolute top-10 left-10 right-10 bottom-16 rounded-2xl bg-gradient-to-br from-accent/40 to-accent2/30 blur-sm" style="z-index:2"></div>
+        <div class="parallax-layer absolute top-20 left-20 right-16 bottom-24 rounded-2xl bg-surface border border-white/10 shadow-2xl grid place-items-center" style="z-index:3">
+          <div class="text-center px-6">
+            <div class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-accent to-accent2 grid place-items-center mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+            </div>
+            <p class="font-display text-lg">Rendu en direct</p>
+            <p class="text-xs text-muted mt-1">Aucune image statique</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="relative py-28 px-6 border-t border-white/5">
+    <div class="mx-auto max-w-6xl">
+      <div class="reveal text-center max-w-xl mx-auto mb-16">
+        <p class="text-accent2 text-sm font-semibold mb-3 uppercase tracking-wider">Avis</p>
+        <h2 class="font-display text-4xl leading-tight">Ce qu'ils en pensent</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <figure class="reveal glass rounded-3xl p-7">
+          <div class="flex gap-1 text-amber-400 mb-4" aria-hidden="true">★★★★★</div>
+          <blockquote class="text-sm text-muted leading-relaxed mb-6">« La première impression est bluffante. L'effet au chargement fait immédiatement 'wow' en démo client. »</blockquote>
+          <figcaption class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-accent to-accent2"></div>
+            <div><p class="text-sm font-semibold">Camille Roy</p><p class="text-xs text-muted">Product Designer</p></div>
+          </figcaption>
+        </figure>
+        <figure class="reveal glass rounded-3xl p-7">
+          <div class="flex gap-1 text-amber-400 mb-4" aria-hidden="true">★★★★★</div>
+          <blockquote class="text-sm text-muted leading-relaxed mb-6">« Fluide même sur mobile bas de gamme. Les animations ne cassent jamais la lisibilité. »</blockquote>
+          <figcaption class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-accent2 to-indigo-400"></div>
+            <div><p class="text-sm font-semibold">Yanis Belkacem</p><p class="text-xs text-muted">Lead Frontend</p></div>
+          </figcaption>
+        </figure>
+        <figure class="reveal glass rounded-3xl p-7">
+          <div class="flex gap-1 text-amber-400 mb-4" aria-hidden="true">★★★★★</div>
+          <blockquote class="text-sm text-muted leading-relaxed mb-6">« Exactement le niveau de finition qu'on voulait montrer à nos investisseurs. »</blockquote>
+          <figcaption class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-400 to-accent"></div>
+            <div><p class="text-sm font-semibold">Sarah Nguyen</p><p class="text-xs text-muted">Fondatrice</p></div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section id="cta" class="relative py-28 px-6 border-t border-white/5 overflow-hidden">
+    <div class="blob w-[26rem] h-[26rem] bg-accent left-1/2 -translate-x-1/2 -top-10" data-blob="4"></div>
+    <div class="reveal relative mx-auto max-w-3xl text-center glass rounded-3xl px-8 py-16">
+      <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Prêt à faire forte impression&nbsp;?</h2>
+      <p class="text-muted mb-10 max-w-md mx-auto">Lancez la démo et jugez l'effet dès les 3 premières secondes.</p>
+      <a href="#" class="btn-magnetic cursor-pointer inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent2 px-8 py-4 font-semibold shadow-[0_0_50px_-10px_rgba(139,92,246,0.9)] hover:scale-[1.04] active:scale-95 transition-transform duration-300">
+        Lancer la démo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3z"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/5 py-10 px-6">
+  <div class="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
+    <p>© 2026 Nova. Démonstration à usage de présentation.</p>
+    <div class="flex gap-6">
+      <a href="#" class="hover:text-white transition-colors duration-200">Confidentialité</a>
+      <a href="#" class="hover:text-white transition-colors duration-200">Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/gsap.min.js"></script>
+<script src="assets/js/ScrollTrigger.min.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
