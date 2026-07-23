@@ -53,3 +53,17 @@ if (stickyBar && heroCta) {
   );
   io.observe(heroCta);
 }
+
+// Add-to-cart feedback: brief toast confirmation on the terminal purchase buttons
+const toast = document.getElementById('toast');
+let toastTimer = null;
+function showToast() {
+  if (!toast) return;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+}
+['final-cta', 'sticky-cta'].forEach((id) => {
+  const btn = document.getElementById(id);
+  if (btn) btn.addEventListener('click', showToast);
+});

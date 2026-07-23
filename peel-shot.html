@@ -34,15 +34,78 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  .swatch {
+    border-radius: 9999px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .swatch-face {
+    background: radial-gradient(circle at 32% 28%, #fff 0%, rgba(255,255,255,0.85) 12%, rgba(233,180,176,0.55) 40%, rgba(196,41,61,0.28) 75%, rgba(196,41,61,0.16) 100%);
+  }
+  .swatch-body {
+    background: radial-gradient(circle at 32% 28%, #fff 0%, rgba(255,255,255,0.9) 14%, rgba(220,220,222,0.5) 45%, rgba(180,182,188,0.32) 80%, rgba(170,172,178,0.22) 100%);
+  }
+
+  .cta-pulse { position: relative; }
+  .cta-pulse::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 9999px;
+    box-shadow: 0 0 0 0 rgba(196,41,61,0.45);
+    animation: ctapulse 2.6s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes ctapulse {
+    0% { box-shadow: 0 0 0 0 rgba(196,41,61,0.45); }
+    70% { box-shadow: 0 0 0 14px rgba(196,41,61,0); }
+    100% { box-shadow: 0 0 0 0 rgba(196,41,61,0); }
+  }
+
+  #toast {
+    position: fixed; left: 50%; bottom: 1.75rem; transform: translate(-50%, 12px);
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 60;
+  }
+  #toast.show { opacity: 1; transform: translate(-50%, 0); }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
     .reveal { opacity: 1 !important; }
     .bar-fill { transform: scaleX(1) !important; }
+    .cta-pulse::after { display: none; }
   }
 </style>
 </head>
 
 <body class="bg-canvas text-ink font-sans antialiased">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gBottleRed" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7E1522"/>
+      <stop offset="16%" stop-color="#B8253A"/>
+      <stop offset="42%" stop-color="#E8536A"/>
+      <stop offset="58%" stop-color="#DC3A52"/>
+      <stop offset="84%" stop-color="#A81F32"/>
+      <stop offset="100%" stop-color="#6E1420"/>
+    </linearGradient>
+    <linearGradient id="gCapBlack" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0B0908"/>
+      <stop offset="35%" stop-color="#332B28"/>
+      <stop offset="55%" stop-color="#4A3F3A"/>
+      <stop offset="75%" stop-color="#221C1A"/>
+      <stop offset="100%" stop-color="#0B0908"/>
+    </linearGradient>
+    <linearGradient id="gShine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="gFloorShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3A0E14" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#3A0E14" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
 
 <a href="#produit" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-rouge focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Aller au contenu</a>
 
@@ -103,7 +166,7 @@
         <p class="reveal text-xs text-subink mb-7">Duo visage 80&nbsp;ml + corps 280&nbsp;ml · TVA incluse</p>
 
         <div class="reveal flex flex-col sm:flex-row gap-3">
-          <a href="#acheter" class="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-rouge text-white font-semibold px-7 py-3.5 hover:bg-rougedark transition-colors duration-200">
+          <a href="#acheter" class="cta-pulse cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-rouge text-white font-semibold px-7 py-3.5 hover:bg-rougedark transition-colors duration-200">
             Ajouter au panier — 44,90&nbsp;€
           </a>
           <a href="#resultats" class="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full border border-line px-7 py-3.5 font-semibold hover:bg-surface transition-colors duration-200">
@@ -122,27 +185,34 @@
 
         <div class="relative flex items-end justify-center gap-6 py-8">
           <!-- Body bottle (pump) -->
-          <svg class="bottle" width="150" height="360" viewBox="0 0 150 360" fill="none">
-            <rect x="20" y="70" width="110" height="270" rx="14" fill="#C4293D"/>
-            <rect x="20" y="70" width="110" height="60" rx="14" fill="#FFFFFF" fill-opacity="0.14"/>
-            <rect x="34" y="150" width="82" height="150" rx="4" fill="#FFFFFF"/>
-            <rect x="34" y="150" width="82" height="16" fill="#C4293D"/>
-            <text x="75" y="200" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="7" font-weight="700" fill="#241D1A" transform="rotate(90 75 200)" letter-spacing="1">HYPOCHLOROUS ACID</text>
-            <rect x="40" y="40" width="70" height="32" rx="6" fill="#1C1613"/>
-            <rect x="60" y="14" width="30" height="30" rx="4" fill="#1C1613"/>
-            <rect x="30" y="10" width="90" height="10" rx="5" fill="#1C1613"/>
+          <svg class="bottle" width="150" height="380" viewBox="0 0 150 380" fill="none">
+            <ellipse cx="75" cy="356" rx="58" ry="14" fill="url(#gFloorShadow)"/>
+            <rect x="20" y="70" width="110" height="270" rx="16" fill="url(#gBottleRed)"/>
+            <rect x="34" y="70" width="14" height="270" fill="url(#gShine)" opacity="0.8"/>
+            <rect x="20" y="70" width="110" height="270" rx="16" fill="none" stroke="#5A0F19" stroke-opacity="0.25"/>
+            <rect x="34" y="152" width="82" height="150" rx="4" fill="#FFFFFF"/>
+            <rect x="34" y="152" width="82" height="150" rx="4" fill="none" stroke="#00000010"/>
+            <rect x="34" y="152" width="82" height="17" fill="#C4293D"/>
+            <text x="75" y="203" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="7" font-weight="700" fill="#241D1A" transform="rotate(90 75 203)" letter-spacing="1">HYPOCHLOROUS ACID</text>
+            <rect x="40" y="42" width="70" height="30" rx="6" fill="url(#gCapBlack)"/>
+            <rect x="60" y="16" width="30" height="28" rx="4" fill="url(#gCapBlack)"/>
+            <rect x="28" y="10" width="94" height="10" rx="5" fill="url(#gCapBlack)"/>
+            <rect x="60" y="4" width="30" height="7" rx="3.5" fill="url(#gCapBlack)"/>
           </svg>
 
           <!-- Face bottle (dropper) -->
-          <svg class="bottle -mb-4" width="110" height="280" viewBox="0 0 110 280" fill="none">
-            <rect x="10" y="70" width="90" height="200" rx="12" fill="#C4293D"/>
-            <rect x="10" y="70" width="90" height="40" rx="12" fill="#FFFFFF" fill-opacity="0.14"/>
-            <rect x="20" y="130" width="70" height="120" rx="4" fill="#FFFFFF"/>
-            <rect x="20" y="130" width="70" height="14" fill="#C4293D"/>
-            <text x="55" y="175" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="6" font-weight="700" fill="#241D1A" transform="rotate(90 55 175)" letter-spacing="1">RICE PEEL SHOT</text>
-            <path d="M35 20 L75 20 L68 70 L42 70 Z" fill="#1C1613"/>
-            <rect x="48 " y="0" width="14" height="24" fill="#1C1613"/>
-            <circle cx="55" cy="0" r="9" fill="#1C1613"/>
+          <svg class="bottle -mb-4" width="110" height="300" viewBox="0 0 110 300" fill="none">
+            <ellipse cx="55" cy="282" rx="46" ry="11" fill="url(#gFloorShadow)"/>
+            <rect x="10" y="70" width="90" height="200" rx="14" fill="url(#gBottleRed)"/>
+            <rect x="22" y="70" width="11" height="200" fill="url(#gShine)" opacity="0.8"/>
+            <rect x="10" y="70" width="90" height="200" rx="14" fill="none" stroke="#5A0F19" stroke-opacity="0.25"/>
+            <rect x="20" y="132" width="70" height="120" rx="4" fill="#FFFFFF"/>
+            <rect x="20" y="132" width="70" height="120" rx="4" fill="none" stroke="#00000010"/>
+            <rect x="20" y="132" width="70" height="15" fill="#C4293D"/>
+            <text x="55" y="178" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="6" font-weight="700" fill="#241D1A" transform="rotate(90 55 178)" letter-spacing="1">RICE PEEL SHOT</text>
+            <path d="M32 18 L78 18 L69 70 L41 70 Z" fill="url(#gCapBlack)"/>
+            <rect x="47" y="0" width="16" height="22" rx="2" fill="url(#gCapBlack)"/>
+            <ellipse cx="55" cy="0" rx="11" ry="8" fill="url(#gCapBlack)"/>
           </svg>
         </div>
 
@@ -176,7 +246,10 @@
             <h3 class="font-semibold mb-2">Bénéfices</h3>
             <p class="text-sm text-subink leading-relaxed mb-5">Élimine les cellules mortes et l'excès de sébum qui peuvent contribuer aux imperfections visibles.</p>
             <h3 class="font-semibold mb-2">Texture</h3>
-            <p class="text-sm text-subink leading-relaxed">Sérum riche et hydratant, adapté à tous les types de peau.</p>
+            <div class="flex items-center gap-3">
+              <span class="swatch swatch-face w-10 h-10 shrink-0" aria-hidden="true"></span>
+              <p class="text-sm text-subink leading-relaxed">Sérum riche et hydratant, adapté à tous les types de peau.</p>
+            </div>
           </div>
         </article>
 
@@ -186,7 +259,10 @@
             <h3 class="font-semibold mb-2">Bénéfices</h3>
             <p class="text-sm text-subink leading-relaxed mb-5">Aide à atténuer les poils incarnés, les zones rêches et le grain de peau irrégulier.</p>
             <h3 class="font-semibold mb-2">Texture</h3>
-            <p class="text-sm text-subink leading-relaxed">Formule fluide et légère, conçue pour s'étaler facilement sur de grandes surfaces.</p>
+            <div class="flex items-center gap-3">
+              <span class="swatch swatch-body w-10 h-10 shrink-0" aria-hidden="true"></span>
+              <p class="text-sm text-subink leading-relaxed">Formule fluide et légère, conçue pour s'étaler facilement sur de grandes surfaces.</p>
+            </div>
           </div>
         </article>
       </div>
@@ -295,13 +371,16 @@
         </ul>
       </div>
       <div class="order-1 lg:order-2 reveal rounded-3xl bg-blush aspect-square flex items-center justify-center" aria-hidden="true">
-        <svg width="140" height="280" viewBox="0 0 150 360" fill="none">
-          <rect x="20" y="70" width="110" height="270" rx="14" fill="#C4293D"/>
-          <rect x="34" y="150" width="82" height="150" rx="4" fill="#FFFFFF"/>
-          <rect x="34" y="150" width="82" height="16" fill="#C4293D"/>
-          <rect x="40" y="40" width="70" height="32" rx="6" fill="#1C1613"/>
-          <rect x="60" y="14" width="30" height="30" rx="4" fill="#1C1613"/>
-          <rect x="30" y="10" width="90" height="10" rx="5" fill="#1C1613"/>
+        <svg width="150" height="300" viewBox="0 0 150 380" fill="none">
+          <ellipse cx="75" cy="356" rx="58" ry="14" fill="url(#gFloorShadow)"/>
+          <rect x="20" y="70" width="110" height="270" rx="16" fill="url(#gBottleRed)"/>
+          <rect x="34" y="70" width="14" height="270" fill="url(#gShine)" opacity="0.8"/>
+          <rect x="34" y="152" width="82" height="150" rx="4" fill="#FFFFFF"/>
+          <rect x="34" y="152" width="82" height="17" fill="#C4293D"/>
+          <text x="75" y="203" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="7" font-weight="700" fill="#241D1A" transform="rotate(90 75 203)" letter-spacing="1">BODY PEEL SHOT</text>
+          <rect x="40" y="42" width="70" height="30" rx="6" fill="url(#gCapBlack)"/>
+          <rect x="60" y="16" width="30" height="28" rx="4" fill="url(#gCapBlack)"/>
+          <rect x="28" y="10" width="94" height="10" rx="5" fill="url(#gCapBlack)"/>
         </svg>
       </div>
     </div>
@@ -380,9 +459,9 @@
     <div class="mx-auto max-w-3xl px-6 py-20 text-center">
       <h2 class="reveal font-display text-3xl sm:text-4xl mb-4" style="text-wrap: balance;">Prête pour une peau visiblement plus nette ?</h2>
       <p class="reveal text-white/70 mb-8 max-w-prose mx-auto">Le duo visage &amp; corps, testé cliniquement, en un seul geste.</p>
-      <a href="#" class="reveal cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-rouge text-white font-semibold px-8 py-4 hover:bg-rougedark transition-colors duration-200">
+      <button type="button" id="final-cta" class="cta-pulse reveal cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-rouge text-white font-semibold px-8 py-4 hover:bg-rougedark transition-colors duration-200">
         Ajouter au panier — 44,90&nbsp;€
-      </a>
+      </button>
     </div>
   </section>
 
@@ -404,7 +483,14 @@
     <p class="text-sm font-semibold leading-tight">Duo Peel Shot</p>
     <p class="text-xs text-subink">44,90&nbsp;€</p>
   </div>
-  <a href="#acheter" class="cursor-pointer rounded-full bg-rouge text-white text-sm font-semibold px-5 py-2.5">Ajouter au panier</a>
+  <button type="button" id="sticky-cta" class="cursor-pointer rounded-full bg-rouge text-white text-sm font-semibold px-5 py-2.5">Ajouter au panier</button>
+</div>
+
+<div id="toast" class="glass rounded-full bg-ink text-white text-sm font-medium px-5 py-2.5 shadow-xl" role="status" aria-live="polite">
+  <span class="inline-flex items-center gap-2">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    Ajouté au panier
+  </span>
 </div>
 
 <script src="assets/peel-shot/js/gsap.min.js"></script>
