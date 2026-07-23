@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Luméa Skin — Skincare coréenne, testée cliniquement</title>
+<meta name="description" content="Luméa Skin sélectionne des soins coréens à la pointe de la science cutanée, testés cliniquement et pensés pour durer." />
+
+<link rel="stylesheet" href="assets/peel-shot/css/fonts.css" />
+<link rel="stylesheet" href="assets/peel-shot/css/tailwind.css" />
+
+<style>
+  html, body { background: #FBF6F2; }
+  ::selection { background: #C4293D; color: #fff; }
+
+  .eyebrow { letter-spacing: 0.14em; }
+  .reveal { opacity: 0; }
+
+  .word { display: inline-block; overflow: hidden; }
+  .word > span { display: inline-block; will-change: transform, opacity; }
+
+  .blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    will-change: transform;
+  }
+
+  .bottle { filter: drop-shadow(0 30px 40px rgba(196, 41, 61, 0.14)); }
+
+  .bar-track { background: #F1E6E0; }
+  .bar-fill { transform-origin: left; transform: scaleX(0); }
+
+  .marquee-track { animation: marquee 22s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .tile { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .tile:hover { transform: translateY(-4px); }
+
+  .cta-pulse { position: relative; }
+  .cta-pulse::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 9999px;
+    box-shadow: 0 0 0 0 rgba(196,41,61,0.45);
+    animation: ctapulse 2.6s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes ctapulse {
+    0% { box-shadow: 0 0 0 0 rgba(196,41,61,0.45); }
+    70% { box-shadow: 0 0 0 14px rgba(196,41,61,0); }
+    100% { box-shadow: 0 0 0 0 rgba(196,41,61,0); }
+  }
+
+  #toast {
+    position: fixed; left: 50%; bottom: 1.75rem; transform: translate(-50%, 12px);
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 60;
+  }
+  #toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+    .reveal { opacity: 1 !important; }
+    .bar-fill { transform: scaleX(1) !important; }
+    .cta-pulse::after { display: none; }
+  }
+</style>
+</head>
+
+<body class="bg-canvas text-ink font-sans antialiased overflow-x-hidden">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gBottleRed" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7E1522"/>
+      <stop offset="16%" stop-color="#B8253A"/>
+      <stop offset="42%" stop-color="#E8536A"/>
+      <stop offset="58%" stop-color="#DC3A52"/>
+      <stop offset="84%" stop-color="#A81F32"/>
+      <stop offset="100%" stop-color="#6E1420"/>
+    </linearGradient>
+    <linearGradient id="gCapBlack" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0B0908"/>
+      <stop offset="35%" stop-color="#332B28"/>
+      <stop offset="55%" stop-color="#4A3F3A"/>
+      <stop offset="75%" stop-color="#221C1A"/>
+      <stop offset="100%" stop-color="#0B0908"/>
+    </linearGradient>
+    <linearGradient id="gShine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="gFloorShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3A0E14" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#3A0E14" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-rouge focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Aller au contenu</a>
+
+<!-- TICKER BANNER -->
+<div class="bg-ink text-canvas text-xs overflow-hidden">
+  <div class="flex py-2">
+    <div class="marquee-track flex items-center gap-10 pr-10 shrink-0 whitespace-nowrap">
+      <span>Livraison offerte dès 40&nbsp;€</span>
+      <span class="text-white/30">·</span>
+      <span>Testé cliniquement</span>
+      <span class="text-white/30">·</span>
+      <span>Retours sous 30 jours</span>
+      <span class="text-white/30">·</span>
+      <span>Formules douces</span>
+      <span class="text-white/30">·</span>
+    </div>
+    <div class="marquee-track flex items-center gap-10 pr-10 shrink-0 whitespace-nowrap" aria-hidden="true">
+      <span>Livraison offerte dès 40&nbsp;€</span>
+      <span class="text-white/30">·</span>
+      <span>Testé cliniquement</span>
+      <span class="text-white/30">·</span>
+      <span>Retours sous 30 jours</span>
+      <span class="text-white/30">·</span>
+      <span>Formules douces</span>
+      <span class="text-white/30">·</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 bg-canvas/90 backdrop-blur border-b border-line">
+  <nav class="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
+    <a href="accueil.html" class="font-display text-xl tracking-tight" aria-label="Luméa Skin, accueil">Luméa Skin</a>
+    <div class="hidden md:flex items-center gap-8 text-sm text-subink">
+      <a href="#selection" class="hover:text-ink transition-colors duration-200">Sélection</a>
+      <a href="#pourquoi" class="hover:text-ink transition-colors duration-200">Pourquoi nous</a>
+      <a href="peel-shot.html#resultats" class="hover:text-ink transition-colors duration-200">Résultats</a>
+      <a href="#newsletter" class="hover:text-ink transition-colors duration-200">Newsletter</a>
+    </div>
+    <a href="peel-shot.html" class="cursor-pointer inline-flex items-center gap-2 rounded-full bg-rouge text-white text-sm font-semibold px-5 py-2.5 hover:bg-rougedark transition-colors duration-200">
+      Découvrir
+    </a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="blob w-[26rem] h-[26rem] bg-blush -top-16 -left-16 opacity-70" data-blob="1"></div>
+    <div class="blob w-[22rem] h-[22rem] bg-rouge/10 top-24 right-0 opacity-70" data-blob="2"></div>
+    <div class="blob w-[18rem] h-[18rem] bg-blush bottom-0 left-1/3 opacity-60" data-blob="3"></div>
+
+    <div class="relative mx-auto max-w-6xl px-6 pt-16 pb-24 grid lg:grid-cols-2 gap-14 items-center">
+      <div>
+        <div class="reveal inline-flex items-center gap-2 rounded-full bg-blush text-rougedark text-xs font-semibold px-3 py-1.5 mb-6 eyebrow uppercase">
+          Skincare coréenne, sélection Luméa
+        </div>
+
+        <h1 class="hero-headline font-display text-4xl sm:text-5xl md:text-6xl leading-[1.08] mb-6" style="text-wrap: balance;">
+          <span class="word">Prenez</span> <span class="word">soin</span> <span class="word">de</span> <span class="word">votre</span> <span class="word">peau,</span> <span class="word"><em class="not-italic text-rouge">vraiment</em>.</span>
+        </h1>
+
+        <p class="reveal text-lg text-subink leading-relaxed max-w-prose mb-8">
+          Luméa Skin sélectionne des soins coréens à la pointe de la science cutanée — testés cliniquement, formulés en douceur, pensés pour durer.
+        </p>
+
+        <div class="reveal flex flex-col sm:flex-row gap-3 mb-8">
+          <a href="peel-shot.html" class="cta-pulse cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-rouge text-white font-semibold px-7 py-3.5 hover:bg-rougedark transition-colors duration-200">
+            Découvrir le Peel Shot
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#pourquoi" class="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full border border-line px-7 py-3.5 font-semibold hover:bg-surface transition-colors duration-200">
+            Pourquoi Luméa Skin
+          </a>
+        </div>
+
+        <div class="reveal flex items-center gap-6 text-xs text-subink">
+          <span class="inline-flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Testé cliniquement</span>
+          <span class="inline-flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a4 4 0 018 0v2"/></svg>Paiement sécurisé</span>
+        </div>
+      </div>
+
+      <div class="relative reveal" aria-hidden="true">
+        <div class="relative flex items-end justify-center gap-6 py-8">
+          <svg class="bottle" width="150" height="380" viewBox="0 0 150 380" fill="none">
+            <ellipse cx="75" cy="356" rx="58" ry="14" fill="url(#gFloorShadow)"/>
+            <rect x="20" y="70" width="110" height="270" rx="16" fill="url(#gBottleRed)"/>
+            <rect x="34" y="70" width="14" height="270" fill="url(#gShine)" opacity="0.8"/>
+            <rect x="34" y="152" width="82" height="150" rx="4" fill="#FFFFFF"/>
+            <rect x="34" y="152" width="82" height="17" fill="#C4293D"/>
+            <text x="75" y="203" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="7" font-weight="700" fill="#241D1A" transform="rotate(90 75 203)" letter-spacing="1">HYPOCHLOROUS ACID</text>
+            <rect x="40" y="42" width="70" height="30" rx="6" fill="url(#gCapBlack)"/>
+            <rect x="60" y="16" width="30" height="28" rx="4" fill="url(#gCapBlack)"/>
+            <rect x="28" y="10" width="94" height="10" rx="5" fill="url(#gCapBlack)"/>
+          </svg>
+          <svg class="bottle -mb-4" width="110" height="300" viewBox="0 0 110 300" fill="none">
+            <ellipse cx="55" cy="282" rx="46" ry="11" fill="url(#gFloorShadow)"/>
+            <rect x="10" y="70" width="90" height="200" rx="14" fill="url(#gBottleRed)"/>
+            <rect x="22" y="70" width="11" height="200" fill="url(#gShine)" opacity="0.8"/>
+            <rect x="20" y="132" width="70" height="120" rx="4" fill="#FFFFFF"/>
+            <rect x="20" y="132" width="70" height="15" fill="#C4293D"/>
+            <text x="55" y="178" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="6" font-weight="700" fill="#241D1A" transform="rotate(90 55 178)" letter-spacing="1">RICE PEEL SHOT</text>
+            <path d="M32 18 L78 18 L69 70 L41 70 Z" fill="url(#gCapBlack)"/>
+            <rect x="47" y="0" width="16" height="22" rx="2" fill="url(#gCapBlack)"/>
+            <ellipse cx="55" cy="0" rx="11" ry="8" fill="url(#gCapBlack)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <a href="#selection" aria-label="Défiler vers le bas" class="scroll-cue reveal hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 text-muted text-subink">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-bounce"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- USP STRIP -->
+  <section class="border-y border-line bg-surface">
+    <div class="mx-auto max-w-6xl px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="reveal flex items-center gap-3">
+        <span class="w-10 h-10 rounded-full bg-blush text-rougedark grid place-items-center shrink-0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/></svg></span>
+        <span class="text-sm font-medium">Testé cliniquement</span>
+      </div>
+      <div class="reveal flex items-center gap-3">
+        <span class="w-10 h-10 rounded-full bg-blush text-rougedark grid place-items-center shrink-0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg></span>
+        <span class="text-sm font-medium">Livraison 48–72h</span>
+      </div>
+      <div class="reveal flex items-center gap-3">
+        <span class="w-10 h-10 rounded-full bg-blush text-rougedark grid place-items-center shrink-0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 0115.4-6.4L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 01-15.4 6.4L3 16M3 21v-5h5"/></svg></span>
+        <span class="text-sm font-medium">Retours 30 jours</span>
+      </div>
+      <div class="reveal flex items-center gap-3">
+        <span class="w-10 h-10 rounded-full bg-blush text-rougedark grid place-items-center shrink-0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c4 3 7 6.5 7 10.5A7 7 0 015 13.5C5 9.5 8 6 12 3z"/></svg></span>
+        <span class="text-sm font-medium">Formules douces</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCT -->
+  <section id="selection" class="relative py-24 px-6">
+    <div class="mx-auto max-w-6xl">
+      <div class="reveal max-w-xl mb-14">
+        <p class="eyebrow uppercase text-xs font-semibold text-rougedark mb-3">Notre sélection du moment</p>
+        <h2 class="font-display text-3xl sm:text-4xl" style="text-wrap: balance;">Le soin qui fait déjà parler de lui</h2>
+      </div>
+
+      <div class="reveal grid lg:grid-cols-2 gap-10 items-center rounded-3xl border border-line bg-surface p-8 sm:p-12">
+        <div class="flex items-end justify-center gap-4" aria-hidden="true">
+          <svg class="bottle" width="110" height="280" viewBox="0 0 150 380" fill="none">
+            <ellipse cx="75" cy="356" rx="58" ry="14" fill="url(#gFloorShadow)"/>
+            <rect x="20" y="70" width="110" height="270" rx="16" fill="url(#gBottleRed)"/>
+            <rect x="34" y="70" width="14" height="270" fill="url(#gShine)" opacity="0.8"/>
+            <rect x="34" y="152" width="82" height="150" rx="4" fill="#FFFFFF"/>
+            <rect x="34" y="152" width="82" height="17" fill="#C4293D"/>
+            <rect x="40" y="42" width="70" height="30" rx="6" fill="url(#gCapBlack)"/>
+            <rect x="60" y="16" width="30" height="28" rx="4" fill="url(#gCapBlack)"/>
+            <rect x="28" y="10" width="94" height="10" rx="5" fill="url(#gCapBlack)"/>
+          </svg>
+          <svg class="bottle -mb-3" width="82" height="220" viewBox="0 0 110 300" fill="none">
+            <ellipse cx="55" cy="282" rx="46" ry="11" fill="url(#gFloorShadow)"/>
+            <rect x="10" y="70" width="90" height="200" rx="14" fill="url(#gBottleRed)"/>
+            <rect x="22" y="70" width="11" height="200" fill="url(#gShine)" opacity="0.8"/>
+            <rect x="20" y="132" width="70" height="120" rx="4" fill="#FFFFFF"/>
+            <rect x="20" y="132" width="70" height="15" fill="#C4293D"/>
+            <path d="M32 18 L78 18 L69 70 L41 70 Z" fill="url(#gCapBlack)"/>
+            <rect x="47" y="0" width="16" height="22" rx="2" fill="url(#gCapBlack)"/>
+            <ellipse cx="55" cy="0" rx="11" ry="8" fill="url(#gCapBlack)"/>
+          </svg>
+        </div>
+
+        <div>
+          <p class="text-xs uppercase tracking-wide text-subink mb-2">Par <span class="font-semibold text-ink">medicube</span></p>
+          <h3 class="font-display text-2xl sm:text-3xl mb-3">Peel Shot Acide Hypochloreux au Riz</h3>
+          <p class="text-subink leading-relaxed mb-6 max-w-md">Le duo visage &amp; corps qui affine les pores et lisse la peau dès la première application — formule testée en laboratoire indépendant.</p>
+
+          <div class="grid grid-cols-3 gap-3 mb-7 max-w-sm">
+            <div>
+              <p class="font-display text-xl text-rougedark"><span class="stat-num" data-target="75.46">0</span>%</p>
+              <p class="text-[11px] text-subink leading-tight mt-1">cellules mortes en moins</p>
+            </div>
+            <div>
+              <p class="font-display text-xl text-rougedark"><span class="stat-num" data-target="18.87">0</span>%</p>
+              <p class="text-[11px] text-subink leading-tight mt-1">sébum en excès en moins</p>
+            </div>
+            <div>
+              <p class="font-display text-xl text-rougedark"><span class="stat-num" data-target="99.30">0</span>%</p>
+              <p class="text-[11px] text-subink leading-tight mt-1">impuretés des pores en moins</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <a href="peel-shot.html" class="cursor-pointer inline-flex items-center gap-2 rounded-full bg-rouge text-white font-semibold px-6 py-3 hover:bg-rougedark transition-colors duration-200">
+              Découvrir — 44,90&nbsp;€
+            </a>
+            <span class="text-xs text-subink">Duo visage 80&nbsp;ml + corps 280&nbsp;ml</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="pourquoi" class="border-t border-line bg-surface">
+    <div class="mx-auto max-w-6xl px-6 py-24">
+      <div class="reveal text-center max-w-2xl mx-auto mb-14">
+        <p class="eyebrow uppercase text-xs font-semibold text-rougedark mb-3">Pourquoi Luméa Skin</p>
+        <h2 class="font-display text-3xl sm:text-4xl" style="text-wrap: balance;">Une sélection exigeante, pas un catalogue infini</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div class="reveal rounded-3xl border border-line bg-canvas p-7">
+          <div class="w-11 h-11 rounded-2xl bg-blush text-rougedark grid place-items-center mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </div>
+          <h3 class="font-semibold mb-2">Curation rigoureuse</h3>
+          <p class="text-sm text-subink leading-relaxed">Nous ne référençons que des soins dont l'efficacité est démontrée — pas de gamme à rallonge, juste ce qui fonctionne.</p>
+        </div>
+        <div class="reveal rounded-3xl border border-line bg-canvas p-7">
+          <div class="w-11 h-11 rounded-2xl bg-blush text-rougedark grid place-items-center mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h3 class="font-semibold mb-2">Testé cliniquement</h3>
+          <p class="text-sm text-subink leading-relaxed">Chaque référence s'appuie sur des essais cliniques indépendants, pas seulement sur des promesses marketing.</p>
+        </div>
+        <div class="reveal rounded-3xl border border-line bg-canvas p-7">
+          <div class="w-11 h-11 rounded-2xl bg-blush text-rougedark grid place-items-center mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          </div>
+          <h3 class="font-semibold mb-2">Transparence radicale</h3>
+          <p class="text-sm text-subink leading-relaxed">Ingrédients, sources et résultats sont indiqués tels quels, sans enjoliver — vous savez toujours ce que vous appliquez.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <section class="border-t border-line bg-ink text-canvas">
+    <div class="mx-auto max-w-5xl px-6 py-20 text-center">
+      <h2 class="reveal font-display text-3xl sm:text-4xl mb-14" style="text-wrap: balance;">Des résultats, pas des promesses</h2>
+      <div class="grid sm:grid-cols-3 gap-10">
+        <div class="reveal">
+          <p class="font-display text-4xl sm:text-5xl"><span class="stat-num" data-target="75.46">0</span>%</p>
+          <p class="text-sm text-white/60 mt-2">de cellules mortes en moins*</p>
+        </div>
+        <div class="reveal">
+          <p class="font-display text-4xl sm:text-5xl"><span class="stat-num" data-target="18.87">0</span>%</p>
+          <p class="text-sm text-white/60 mt-2">de sébum en excès en moins*</p>
+        </div>
+        <div class="reveal">
+          <p class="font-display text-4xl sm:text-5xl"><span class="stat-num" data-target="99.30">0</span>%</p>
+          <p class="text-sm text-white/60 mt-2">d'impuretés des pores en moins*</p>
+        </div>
+      </div>
+      <p class="reveal text-xs text-white/40 mt-12 max-w-prose mx-auto">*Résultats du Peel Shot Acide Hypochloreux, mesurés après une seule utilisation par le Cutis Biomedical Research Center. Les résultats individuels peuvent varier.</p>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter" class="border-t border-line">
+    <div class="mx-auto max-w-2xl px-6 py-24 text-center">
+      <p class="reveal eyebrow uppercase text-xs font-semibold text-rougedark mb-3">Restons en contact</p>
+      <h2 class="reveal font-display text-3xl sm:text-4xl mb-4" style="text-wrap: balance;">-10% sur votre première commande</h2>
+      <p class="reveal text-subink mb-8">Rejoignez la liste Luméa Skin pour être averti·e des nouveautés et profiter de -10% dès votre inscription.</p>
+      <form class="reveal flex flex-col sm:flex-row gap-3 max-w-md mx-auto" id="newsletter-form">
+        <label for="newsletter-email" class="sr-only">Adresse e-mail</label>
+        <input id="newsletter-email" type="email" required placeholder="vous@exemple.com"
+          class="flex-1 rounded-full border border-line bg-surface px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rouge/40 focus:border-rouge" />
+        <button type="submit" class="cursor-pointer rounded-full bg-rouge text-white font-semibold px-6 py-3 hover:bg-rougedark transition-colors duration-200">
+          S'inscrire
+        </button>
+      </form>
+      <p class="text-xs text-subink mt-4">Désinscription en un clic, à tout moment.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="border-t border-line bg-surface">
+  <div class="mx-auto max-w-6xl px-6 py-14 grid sm:grid-cols-3 gap-10">
+    <div>
+      <p class="font-display text-lg mb-3">Luméa Skin</p>
+      <p class="text-sm text-subink leading-relaxed max-w-xs">Une sélection exigeante de soins coréens testés cliniquement, pour une peau qui va vraiment mieux.</p>
+    </div>
+    <div>
+      <p class="text-xs uppercase tracking-wide text-subink font-semibold mb-3">Boutique</p>
+      <ul class="space-y-2 text-sm text-subink">
+        <li><a href="peel-shot.html" class="hover:text-ink transition-colors duration-200">Peel Shot Acide Hypochloreux</a></li>
+        <li><a href="#selection" class="hover:text-ink transition-colors duration-200">Notre sélection</a></li>
+        <li><a href="#pourquoi" class="hover:text-ink transition-colors duration-200">Pourquoi Luméa Skin</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-xs uppercase tracking-wide text-subink font-semibold mb-3">Aide</p>
+      <ul class="space-y-2 text-sm text-subink">
+        <li><a href="#" class="hover:text-ink transition-colors duration-200">Livraison &amp; retours</a></li>
+        <li><a href="#" class="hover:text-ink transition-colors duration-200">Confidentialité</a></li>
+        <li><a href="#" class="hover:text-ink transition-colors duration-200">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-line">
+    <div class="mx-auto max-w-6xl px-6 py-5 text-xs text-subink">
+      © 2026 Luméa Skin. Les produits medicube présentés sont distribués par Luméa Skin ; résultats cliniques mesurés par un laboratoire indépendant.
+    </div>
+  </div>
+</footer>
+
+<div id="toast" class="rounded-full bg-ink text-white text-sm font-medium px-5 py-2.5 shadow-xl" role="status" aria-live="polite">
+  <span class="inline-flex items-center gap-2">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    Inscription confirmée
+  </span>
+</div>
+
+<script src="assets/peel-shot/js/gsap.min.js"></script>
+<script src="assets/peel-shot/js/ScrollTrigger.min.js"></script>
+<script src="assets/peel-shot/js/home.js"></script>
+
+</body>
+</html>
