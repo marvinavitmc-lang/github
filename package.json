@@ -1,17 +1,21 @@
 {
-  "name": "nova-premium-demo",
+  "name": "premium-demos",
   "version": "1.0.0",
-  "description": "Premium landing page demo with GSAP wow-effect intro animation",
+  "description": "Premium landing page demos with GSAP animation",
   "private": true,
   "scripts": {
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/tailwind.css --minify",
-    "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/tailwind.css --watch"
+    "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/tailwind.css --watch",
+    "build:css:peel-shot": "tailwindcss --config tailwind.peelshot.config.js -i ./src/input.css -o ./assets/peel-shot/css/tailwind.css --minify",
+    "watch:css:peel-shot": "tailwindcss --config tailwind.peelshot.config.js -i ./src/input.css -o ./assets/peel-shot/css/tailwind.css --watch"
   },
   "license": "UNLICENSED",
   "devDependencies": {
     "@fontsource/calistoga": "^5.3.0",
+    "@fontsource/fraunces": "^5.3.0",
     "@fontsource/inter": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/public-sans": "^5.3.0",
     "gsap": "^3.15.0",
     "tailwindcss": "^3.4.19"
   }
