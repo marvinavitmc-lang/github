@@ -69,7 +69,9 @@
       <div class="lm-hero__stage">
         <div class="lm-hero__ring lm-hero__ring--1"></div>
         <div class="lm-hero__ring lm-hero__ring--2"></div>
-        {%- if section.settings.hero_image -%}
+        {%- if section.settings.hero_image_url != blank -%}
+          <img src="{{ section.settings.hero_image_url }}" alt="Luméa Skin" loading="eager">
+        {%- elsif section.settings.hero_image -%}
           {{ section.settings.hero_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '480,800,1200,1400', alt: section.settings.hero_image.alt | default: 'Luméa Skin — Peel Shot' }}
         {%- elsif lm_product.featured_image -%}
           {{ lm_product.featured_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '480,800,1200,1400', alt: lm_product.title }}
@@ -98,7 +100,8 @@
     { "type": "text", "id": "footnote", "label": "Texte sous les boutons", "default": "Testé cliniquement · Visage & corps" },
     { "type": "text", "id": "badge_text", "label": "Badge sur la photo", "default": "★ 10 000+ clientes satisfaites" },
     { "type": "product", "id": "featured_product", "label": "Produit mis en avant" },
-    { "type": "image_picker", "id": "hero_image", "label": "Photo héro (remplace la photo produit par défaut)" }
+    { "type": "image_picker", "id": "hero_image", "label": "Photo héro (remplace la photo produit par défaut)" },
+    { "type": "url", "id": "hero_image_url", "label": "URL photo héro (lien direct, prioritaire)" }
   ],
   "presets": [{ "name": "Lumea — Hero premium" }]
 }

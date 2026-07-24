@@ -1,11 +1,11 @@
 {
   "sections": {
-    "lm_hero": { "type": "lumea-hero-premium", "settings": {} },
+    "lm_hero": { "type": "lumea-hero-premium", "settings": { "hero_image_url": "https://cdn.shopify.com/s/files/1/1064/5710/4725/files/ChatGPT_Image_23_juil._2026_17_39_32_1148a51e-eb4c-4525-8015-55861c07af0f.png?v=1784902653" } },
     "lm_gallery": {
       "type": "lumea-gallery-premium",
       "blocks": {
         "b1": { "type": "scene", "settings": { "scene_style": "droplets", "caption": "Fraîcheur" } },
-        "b2": { "type": "scene", "settings": { "scene_style": "stone", "caption": "Minéral" } },
+        "b2": { "type": "scene", "settings": { "scene_style": "stone", "caption": "Minéral", "image_url": "https://cdn.shopify.com/s/files/1/1064/5710/4725/files/ChatGPT_Image_23_juil._2026_19_02_06.png?v=1784902510" } },
         "b3": { "type": "scene", "settings": { "scene_style": "leaf", "caption": "Riz & botanique" } },
         "b4": { "type": "scene", "settings": { "scene_style": "sunlight", "caption": "Lumière naturelle" } },
         "b5": { "type": "scene", "settings": { "scene_style": "bath", "caption": "Rituel quotidien" } },

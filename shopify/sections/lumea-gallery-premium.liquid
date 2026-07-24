@@ -32,7 +32,9 @@
                 <path d="M20 160 C60 120 110 70 150 15" stroke="#8FA37A" stroke-width="2" fill="none" opacity=".6"/>
               </svg>
             {% endif %}
-            {% if block.settings.image %}
+            {% if block.settings.image_url != blank %}
+              <img src="{{ block.settings.image_url }}" alt="{{ block.settings.caption | default: 'Luméa Skin' }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+            {% elsif block.settings.image %}
               {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360,600,900', class: '', alt: block.settings.caption | default: 'Luméa Skin' }}
             {% else %}
               <svg class="lm-scene__bottle" viewBox="0 0 120 240"><use href="#lm-bottle"/></svg>
@@ -61,6 +63,7 @@
       "name": "Photo mise en scène",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Photo (laisser vide pour un rendu placeholder premium)" },
+        { "type": "url", "id": "image_url", "label": "URL photo (lien direct, prioritaire)" },
         {
           "type": "select",
           "id": "scene_style",
