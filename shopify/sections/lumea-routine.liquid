@@ -1,0 +1,95 @@
+{% render 'lumea-styles' %}
+
+<section class="lumea-premium lm-routine lm-section lm-section--alt">
+  <style>
+    .lm-routine__head{max-width:640px;margin:0 auto 60px;text-align:center;}
+    .lm-routine__grid{display:grid;grid-template-columns:1fr;gap:44px;position:relative;}
+    @media (min-width:820px){
+      .lm-routine__grid{grid-template-columns:repeat(3,1fr);gap:32px;}
+      .lm-routine__grid:before{
+        content:"";position:absolute;top:56px;left:16%;right:16%;height:1px;
+        background:repeating-linear-gradient(90deg,var(--lm-line) 0 8px,transparent 8px 16px);
+      }
+    }
+    .lm-step{text-align:center;position:relative;}
+    .lm-step__icon{
+      width:112px;height:112px;border-radius:50%;background:#fff;margin:0 auto 26px;
+      display:flex;align-items:center;justify-content:center;color:var(--lm-accent);
+      box-shadow:var(--lm-shadow-md);position:relative;z-index:1;
+    }
+    .lm-step__num{
+      position:absolute;top:-6px;right:6px;width:28px;height:28px;border-radius:50%;background:var(--lm-ink);
+      color:#fff;font-family:'Fraunces',serif;font-size:13px;display:flex;align-items:center;justify-content:center;z-index:2;
+    }
+    .lm-step__title{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:500;margin:0 0 10px;}
+    .lm-step__text{font-size:14.5px;color:var(--lm-subink);line-height:1.6;max-width:280px;margin:0 auto;font-weight:300;}
+  </style>
+
+  <div class="lm-container">
+    <div class="lm-routine__head" data-lm-reveal>
+      <p class="lm-eyebrow lm-center">{{ section.settings.eyebrow | default: 'Rituel' }}</p>
+      <h2 class="lm-title lm-title--lg lm-center">{{ section.settings.title | default: 'Comment utiliser Luméa Skin' }}</h2>
+    </div>
+
+    <div class="lm-routine__grid">
+      {% for block in section.blocks %}
+        <div class="lm-step" data-lm-reveal {{ block.shopify_attributes }}>
+          <div class="lm-step__icon">
+            <span class="lm-step__num">{{ forloop.index }}</span>
+            {% case block.settings.icon %}
+              {% when 'cleanse' %}
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 3v6c0 2-2 3-2 6a5 5 0 0010 0c0-3-2-4-2-6V3"/><path d="M9 3h4"/></svg>
+              {% when 'apply' %}
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 21c0-4 2.5-6 6-6s6 2 6 6"/></svg>
+              {% when 'moisturize' %}
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c4 3.5 7 7.2 7 11.2A7 7 0 015 14.2C5 10.2 8 6.5 12 3z"/></svg>
+              {% else %}
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/></svg>
+            {% endcase %}
+          </div>
+          <h3 class="lm-step__title">{{ block.settings.title }}</h3>
+          <p class="lm-step__text">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lumea — Routine",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Rituel" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Comment utiliser Luméa Skin" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Étape",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icône",
+          "options": [
+            { "value": "cleanse", "label": "Nettoyer" },
+            { "value": "apply", "label": "Appliquer" },
+            { "value": "moisturize", "label": "Hydrater" }
+          ],
+          "default": "cleanse"
+        },
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "textarea", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lumea — Routine",
+      "blocks": [
+        { "type": "step", "settings": { "icon": "cleanse", "title": "Nettoyer", "text": "Nettoyez la peau du visage ou du corps et séchez délicatement." } },
+        { "type": "step", "settings": { "icon": "apply", "title": "Appliquer", "text": "Appliquez sur les zones concernées, en suivant les indications de l'emballage." } },
+        { "type": "step", "settings": { "icon": "moisturize", "title": "Hydrater", "text": "Enchaînez avec votre soin hydratant habituel." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,79 @@
+{% render 'lumea-styles' %}
+
+<section class="lumea-premium lm-faq lm-section lm-section--alt">
+  <style>
+    .lm-faq__wrap{max-width:760px;margin:0 auto;}
+    .lm-faq__head{text-align:center;margin-bottom:48px;}
+    .lm-faq-item{border-bottom:1px solid var(--lm-line);}
+    .lm-faq-item:first-child{border-top:1px solid var(--lm-line);}
+    .lm-faq-trigger{
+      width:100%;text-align:left;background:none;border:0;padding:24px 4px;cursor:pointer;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      font-family:'Fraunces',serif;font-size:1.05rem;color:var(--lm-ink);font-weight:400;
+    }
+    .lm-faq-trigger__plus{
+      flex:none;width:26px;height:26px;position:relative;transition:transform .4s var(--lm-ease);
+    }
+    .lm-faq-trigger__plus:before,.lm-faq-trigger__plus:after{
+      content:"";position:absolute;background:var(--lm-ink);top:50%;left:50%;transform:translate(-50%,-50%);
+    }
+    .lm-faq-trigger__plus:before{width:16px;height:1.4px;}
+    .lm-faq-trigger__plus:after{width:1.4px;height:16px;transition:opacity .3s;}
+    .lm-faq-item.is-open .lm-faq-trigger__plus{transform:rotate(180deg);}
+    .lm-faq-item.is-open .lm-faq-trigger__plus:after{opacity:0;}
+    .lm-faq-panel{padding:0 4px;}
+    .lm-faq-panel p{padding-bottom:24px;margin:0;font-size:14.5px;line-height:1.7;color:var(--lm-subink);font-weight:300;max-width:640px;}
+  </style>
+
+  <div class="lm-container lm-faq__wrap">
+    <div class="lm-faq__head" data-lm-reveal>
+      <p class="lm-eyebrow lm-center">{{ section.settings.eyebrow | default: 'Questions' }}</p>
+      <h2 class="lm-title lm-title--lg lm-center">{{ section.settings.title | default: 'Questions fréquentes' }}</h2>
+    </div>
+
+    {% for block in section.blocks %}
+      <div class="lm-faq-item" data-lm-accordion-item data-lm-reveal {{ block.shopify_attributes }}>
+        <button type="button" class="lm-faq-trigger" data-lm-accordion-trigger>
+          <span>{{ block.settings.question }}</span>
+          <span class="lm-faq-trigger__plus"></span>
+        </button>
+        <div class="lm-faq-panel" data-lm-accordion-panel>
+          <p>{{ block.settings.answer }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% render 'lumea-scripts' %}
+
+{% schema %}
+{
+  "name": "Lumea — FAQ",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Questions" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Questions fréquentes" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Réponse" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lumea — FAQ",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "Puis-je utiliser le même flacon sur le visage et sur le corps ?", "answer": "Le coffret contient deux formules distinctes : un sérum concentré pour le visage et une formule plus fluide pensée pour les grandes surfaces du corps. Utilisez chaque flacon sur la zone à laquelle il est destiné." } },
+        { "type": "faq", "settings": { "question": "Convient-il aux peaux sensibles ?", "answer": "Comme pour tout soin exfoliant, nous recommandons un test préalable sur une petite zone et de suivre les indications de l'emballage. En cas de doute, demandez conseil à un dermatologue." } },
+        { "type": "faq", "settings": { "question": "À quel rythme l'utiliser ?", "answer": "La fréquence recommandée figure sur l'emballage du produit. Commencez progressivement pour évaluer la tolérance de votre peau." } },
+        { "type": "faq", "settings": { "question": "Sous combien de temps vais-je recevoir ma commande ?", "answer": "Les commandes sont préparées sous 24 à 48h ouvrées puis expédiées avec suivi." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

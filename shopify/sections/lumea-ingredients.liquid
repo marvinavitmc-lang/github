@@ -1,0 +1,82 @@
+{% render 'lumea-styles' %}
+
+<section class="lumea-premium lm-ingredients lm-section">
+  <style>
+    .lm-ing__head{max-width:640px;margin:0 auto 52px;text-align:center;}
+    .lm-ing__grid{display:grid;grid-template-columns:1fr;gap:20px;}
+    @media (min-width:700px){.lm-ing__grid{grid-template-columns:repeat(2,1fr);}}
+    .lm-ing-card{padding:36px;display:flex;gap:22px;align-items:flex-start;}
+    .lm-ing-card__icon{
+      flex:none;width:56px;height:56px;border-radius:16px;background:var(--lm-bg-alt);
+      display:flex;align-items:center;justify-content:center;color:var(--lm-accent);
+    }
+    .lm-ing-card__name{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:500;margin:0 0 8px;}
+    .lm-ing-card__latin{font-size:11.5px;color:var(--lm-subink);letter-spacing:.04em;margin:0 0 10px;font-style:italic;}
+    .lm-ing-card__text{font-size:14.5px;line-height:1.65;color:var(--lm-subink);margin:0;font-weight:300;}
+  </style>
+
+  <div class="lm-container">
+    <div class="lm-ing__head" data-lm-reveal>
+      <p class="lm-eyebrow lm-center">{{ section.settings.eyebrow | default: 'La formule' }}</p>
+      <h2 class="lm-title lm-title--lg lm-center">{{ section.settings.title | default: 'Deux actifs, un objectif' }}</h2>
+    </div>
+
+    <div class="lm-ing__grid">
+      {% for block in section.blocks %}
+        <div class="lm-ing-card lm-card" data-lm-reveal {{ block.shopify_attributes }}>
+          <div class="lm-ing-card__icon">
+            {% case block.settings.icon %}
+              {% when 'molecule' %}
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="9" cy="17" r="2.4"/><path d="M8 7.6l6.5-.3M7.5 8.2L9 15M15.5 9l-4.7 6"/></svg>
+              {% else %}
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20c6-1 9-5 9-11a6 6 0 016-6"/><path d="M4 20c0-5 2-8 5-9"/></svg>
+            {% endcase %}
+          </div>
+          <div>
+            <h3 class="lm-ing-card__name">{{ block.settings.name }}</h3>
+            {% if block.settings.latin != blank %}<p class="lm-ing-card__latin">{{ block.settings.latin }}</p>{% endif %}
+            <p class="lm-ing-card__text">{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lumea — Ingrédients",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "La formule" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Deux actifs, un objectif" }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingrédient",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icône",
+          "options": [
+            { "value": "molecule", "label": "Molécule" },
+            { "value": "leaf", "label": "Feuille" }
+          ],
+          "default": "molecule"
+        },
+        { "type": "text", "id": "name", "label": "Nom", "default": "Acide hypochloreux" },
+        { "type": "text", "id": "latin", "label": "Nom latin / technique (optionnel)" },
+        { "type": "textarea", "id": "text", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lumea — Ingrédients",
+      "blocks": [
+        { "type": "ingredient", "settings": { "icon": "molecule", "name": "Acide hypochloreux", "text": "Un actif clarifiant doux qui aide à éliminer les impuretés et l'excès de sébum, sans agresser la barrière cutanée." } },
+        { "type": "ingredient", "settings": { "icon": "leaf", "name": "Extrait de riz", "latin": "Oryza Sativa", "text": "Reconnu en cosmétique coréenne pour son effet apaisant, il aide à révéler l'éclat et l'homogénéité du teint." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

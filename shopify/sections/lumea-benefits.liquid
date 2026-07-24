@@ -1,0 +1,94 @@
+{% render 'lumea-styles' %}
+
+<section class="lumea-premium lm-benefits lm-section lm-section--alt">
+  <style>
+    .lm-benefits__head{max-width:640px;margin:0 auto 52px;text-align:center;}
+    .lm-benefits__grid{display:grid;grid-template-columns:1fr;gap:18px;}
+    @media (min-width:640px){.lm-benefits__grid{grid-template-columns:repeat(2,1fr);}}
+    @media (min-width:980px){.lm-benefits__grid{grid-template-columns:repeat(3,1fr);}}
+    .lm-benefit{padding:34px 28px;display:flex;flex-direction:column;gap:16px;}
+    .lm-benefit__icon{
+      width:52px;height:52px;border-radius:16px;background:var(--lm-accent-soft);
+      display:flex;align-items:center;justify-content:center;color:var(--lm-accent);
+    }
+    .lm-benefit__title{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:500;margin:0;color:var(--lm-ink);}
+    .lm-benefit__text{font-size:14.5px;line-height:1.6;color:var(--lm-subink);margin:0;font-weight:300;}
+  </style>
+
+  <div class="lm-container">
+    <div class="lm-benefits__head" data-lm-reveal>
+      <p class="lm-eyebrow lm-center">{{ section.settings.eyebrow | default: 'Bénéfices' }}</p>
+      <h2 class="lm-title lm-title--lg lm-center">{{ section.settings.title | default: 'Ce que votre peau va ressentir' }}</h2>
+    </div>
+
+    <div class="lm-benefits__grid">
+      {% for block in section.blocks %}
+        <div class="lm-benefit lm-card" data-lm-reveal {{ block.shopify_attributes }}>
+          <div class="lm-benefit__icon">
+            {% case block.settings.icon %}
+              {% when 'leaf' %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20c6-1 9-5 9-11a6 6 0 016-6"/><path d="M4 20c0-5 2-8 5-9"/></svg>
+              {% when 'texture' %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 13c1.5 1.6 3 1.6 4.5 0S15.5 11.4 17 13"/></svg>
+              {% when 'feather' %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 4c-9 0-14 5-14 14v2h2c9 0 14-5 14-14V4z"/><path d="M6 18L20 4"/></svg>
+              {% when 'shield' %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/></svg>
+              {% when 'drop' %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c4 3.5 7 7.2 7 11.2A7 7 0 015 14.2C5 10.2 8 6.5 12 3z"/></svg>
+              {% else %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12l5 5L20 6"/></svg>
+            {% endcase %}
+          </div>
+          <h3 class="lm-benefit__title">{{ block.settings.title }}</h3>
+          <p class="lm-benefit__text">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lumea — Bénéfices",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Bénéfices" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Ce que votre peau va ressentir" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Bénéfice",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icône",
+          "options": [
+            { "value": "check", "label": "Coche" },
+            { "value": "leaf", "label": "Feuille" },
+            { "value": "texture", "label": "Texture" },
+            { "value": "feather", "label": "Plume (douceur)" },
+            { "value": "shield", "label": "Bouclier" },
+            { "value": "drop", "label": "Goutte" }
+          ],
+          "default": "check"
+        },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Exfolie en douceur" },
+        { "type": "textarea", "id": "text", "label": "Texte", "default": "Élimine les cellules mortes sans agresser la barrière cutanée." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lumea — Bénéfices",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "leaf", "title": "Exfolie en douceur", "text": "Élimine les cellules mortes sans agresser la barrière cutanée." } },
+        { "type": "benefit", "settings": { "icon": "texture", "title": "Réduit la peau granuleuse", "text": "Lisse le grain de peau, visage comme corps." } },
+        { "type": "benefit", "settings": { "icon": "feather", "title": "Peau plus douce", "text": "Une texture visiblement plus soyeuse dès la première application." } },
+        { "type": "benefit", "settings": { "icon": "shield", "title": "Convient aux peaux sensibles", "text": "Formule testée cliniquement, respectueuse de l'épiderme." } },
+        { "type": "benefit", "settings": { "icon": "drop", "title": "Hydratation", "text": "Un fini confortable, jamais tiraillé ni asséché." } },
+        { "type": "benefit", "settings": { "icon": "check", "title": "Résultats visibles", "text": "Des effets mesurables dès la première utilisation." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

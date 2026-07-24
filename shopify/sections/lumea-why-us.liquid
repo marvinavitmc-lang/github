@@ -1,0 +1,90 @@
+{% render 'lumea-styles' %}
+
+<section class="lumea-premium lm-whyus lm-section">
+  <style>
+    .lm-whyus__head{max-width:640px;margin:0 auto 64px;text-align:center;}
+    .lm-whyus__row{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;margin-bottom:88px;}
+    .lm-whyus__row:last-child{margin-bottom:0;}
+    @media (min-width:860px){
+      .lm-whyus__row{grid-template-columns:1fr 1fr;gap:72px;}
+      .lm-whyus__row--rev .lm-whyus__visual{order:2;}
+      .lm-whyus__row--rev .lm-whyus__text{order:1;}
+    }
+    .lm-whyus__visual .lm-scene{aspect-ratio:5/4;}
+    .lm-whyus__num{font-family:'Fraunces',serif;font-size:13px;color:var(--lm-accent);letter-spacing:.1em;margin:0 0 14px;}
+    .lm-whyus__text h3{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.5rem,2.4vw,2.1rem);margin:0 0 16px;line-height:1.2;}
+    .lm-whyus__text p{font-size:15.5px;line-height:1.7;color:var(--lm-subink);font-weight:300;max-width:460px;}
+  </style>
+
+  <div class="lm-container">
+    <div class="lm-whyus__head" data-lm-reveal>
+      <p class="lm-eyebrow lm-center">{{ section.settings.eyebrow | default: 'Notre approche' }}</p>
+      <h2 class="lm-title lm-title--lg lm-center">{{ section.settings.title | default: 'Pourquoi choisir Luméa Skin ?' }}</h2>
+    </div>
+
+    {% for block in section.blocks %}
+      {%- assign is_rev = false -%}
+      {%- assign mod2 = forloop.index0 | modulo: 2 -%}
+      {%- if mod2 == 1 -%}{%- assign is_rev = true -%}{%- endif -%}
+      <div class="lm-whyus__row{% if is_rev %} lm-whyus__row--rev{% endif %}" {{ block.shopify_attributes }}>
+        <div class="lm-whyus__visual" data-lm-reveal-scale>
+          <div class="lm-scene lm-scene--{{ block.settings.scene_style | default: 'white' }}">
+            <div class="lm-scene__glow"></div>
+            {% if block.settings.image %}
+              {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '480,720,900', alt: block.settings.heading }}
+            {% else %}
+              <svg class="lm-scene__bottle" viewBox="0 0 120 240"><use href="#lm-bottle"/></svg>
+            {% endif %}
+            <div class="lm-scene__shadow"></div>
+          </div>
+        </div>
+        <div class="lm-whyus__text" data-lm-reveal>
+          <p class="lm-whyus__num">{% if forloop.index < 10 %}0{{ forloop.index }}{% else %}{{ forloop.index }}{% endif %}</p>
+          <h3>{{ block.settings.heading }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lumea — Pourquoi nous",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Notre approche" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Pourquoi choisir Luméa Skin ?" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Argument",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        {
+          "type": "select", "id": "scene_style", "label": "Ambiance placeholder",
+          "options": [
+            { "value": "white", "label": "Fond blanc luxueux" },
+            { "value": "stone", "label": "Pierre naturelle" },
+            { "value": "sunlight", "label": "Lumière du soleil" },
+            { "value": "bath", "label": "Salle de bain moderne" }
+          ],
+          "default": "white"
+        },
+        { "type": "text", "id": "heading", "label": "Titre" },
+        { "type": "textarea", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lumea — Pourquoi nous",
+      "blocks": [
+        { "type": "row", "settings": { "scene_style": "white", "heading": "Une formule cliniquement testée", "text": "Chaque lot est évalué en laboratoire indépendant : -75,46% de cellules mortes, -99,30% d'impuretés des pores dès la première utilisation." } },
+        { "type": "row", "settings": { "scene_style": "stone", "heading": "Deux rituels, une seule promesse", "text": "Un sérum concentré pour le visage, une formule fluide pour le corps — pensés pour travailler ensemble, jamais l'un contre l'autre." } },
+        { "type": "row", "settings": { "scene_style": "sunlight", "heading": "Des actifs choisis, pas empilés", "text": "Acide hypochloreux et extrait de riz : deux ingrédients, sélectionnés pour leur efficacité, sans surcharge inutile." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

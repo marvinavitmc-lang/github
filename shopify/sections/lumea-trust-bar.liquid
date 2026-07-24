@@ -1,0 +1,77 @@
+{% render 'lumea-styles' %}
+
+<section class="lumea-premium lm-trust">
+  <style>
+    .lm-trust{border-top:1px solid var(--lm-line);border-bottom:1px solid var(--lm-line);background:var(--lm-surface);}
+    .lm-trust__row{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:28px;padding:40px 0;
+    }
+    @media (min-width:760px){.lm-trust__row{grid-template-columns:repeat(5,1fr);}}
+    .lm-trust-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;color:var(--lm-subink);}
+    .lm-trust-item svg{color:var(--lm-accent);}
+    .lm-trust-item span{font-size:12px;font-weight:600;letter-spacing:.01em;color:var(--lm-ink);}
+  </style>
+
+  <div class="lm-container">
+    <div class="lm-trust__row">
+      {% for block in section.blocks %}
+        <div class="lm-trust-item" {{ block.shopify_attributes }}>
+          {% case block.settings.icon %}
+            {% when 'truck' %}
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="13" height="9"/><path d="M15 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+            {% when 'lock' %}
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            {% when 'badge' %}
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+            {% when 'chat' %}
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h16v11H8l-4 4V5z"/></svg>
+            {% when 'check' %}
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.3 2.3L15.5 9.5"/></svg>
+            {% else %}
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/></svg>
+          {% endcase %}
+          <span>{{ block.settings.label }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lumea — Confiance",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Élément",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icône",
+          "options": [
+            { "value": "truck", "label": "Livraison" },
+            { "value": "lock", "label": "Paiement sécurisé" },
+            { "value": "badge", "label": "Garantie" },
+            { "value": "chat", "label": "Support" },
+            { "value": "check", "label": "Authenticité" }
+          ],
+          "default": "truck"
+        },
+        { "type": "text", "id": "label", "label": "Texte" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lumea — Confiance",
+      "blocks": [
+        { "type": "trust", "settings": { "icon": "truck", "label": "Livraison rapide" } },
+        { "type": "trust", "settings": { "icon": "lock", "label": "Paiement sécurisé" } },
+        { "type": "trust", "settings": { "icon": "badge", "label": "Garantie satisfaction" } },
+        { "type": "trust", "settings": { "icon": "chat", "label": "Support client" } },
+        { "type": "trust", "settings": { "icon": "check", "label": "Produit authentique" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,105 @@
+{% render 'lumea-styles' %}
+
+{%- assign lm_product = section.settings.featured_product | default: all_products['peel-shot-acide-hypochloreux-au-riz'] -%}
+{%- assign lm_product_url = lm_product.url | default: '/products/peel-shot-acide-hypochloreux-au-riz' -%}
+
+<section class="lumea-premium lm-hero" style="position:relative;overflow:hidden;padding:0;">
+  <style>
+    .lm-hero{background:linear-gradient(160deg,#FDFBF8 0%,#F7F0E6 55%,#F1E7D8 100%);}
+    .lm-hero__inner{
+      max-width:1320px;margin:0 auto;padding:96px 24px 72px;
+      display:grid;grid-template-columns:1fr;gap:56px;align-items:center;
+    }
+    @media (min-width:960px){
+      .lm-hero__inner{grid-template-columns:1fr 1fr;padding:64px 48px;min-height:88vh;gap:24px;}
+    }
+    .lm-hero__eyebrow{font-family:'Fraunces',serif;font-size:15px;letter-spacing:.3em;text-transform:uppercase;color:var(--lm-accent);margin:0 0 26px;}
+    .lm-hero__title{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2.6rem,6vw,4.4rem);line-height:1.05;letter-spacing:-.01em;margin:0 0 26px;color:var(--lm-ink);}
+    .lm-hero__title em{font-style:italic;color:var(--lm-accent);}
+    .lm-hero__title .lm-hero-line{display:block;}
+    .lm-hero__sub{font-size:1.08rem;line-height:1.7;color:var(--lm-subink);max-width:440px;margin:0 0 40px;font-weight:300;}
+    .lm-hero__visual{position:relative;display:flex;align-items:center;justify-content:center;}
+    .lm-hero__stage{
+      position:relative;width:100%;max-width:520px;aspect-ratio:1/1.08;border-radius:44px;
+      background:radial-gradient(circle at 32% 26%,#FFFFFF 0%,#F9F3EA 42%,#EFE2CD 100%);
+      box-shadow:var(--lm-shadow-lg);overflow:hidden;
+    }
+    .lm-hero__stage:before{
+      content:"";position:absolute;top:-30%;left:-10%;width:70%;height:70%;
+      background:radial-gradient(circle,rgba(255,255,255,.85),transparent 70%);pointer-events:none;
+    }
+    .lm-hero__stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:12%;}
+    .lm-hero__stage .lm-hero__bottle-fallback{position:absolute;left:50%;bottom:8%;top:auto;transform:translateX(-50%);width:38%;filter:drop-shadow(0 26px 30px rgba(33,29,25,.2));}
+    .lm-hero__badge{
+      position:absolute;bottom:26px;left:26px;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);
+      border-radius:999px;padding:10px 18px;font-size:12px;font-weight:600;letter-spacing:.04em;
+      box-shadow:var(--lm-shadow-sm);color:var(--lm-ink);
+    }
+    .lm-hero__ring{position:absolute;border-radius:50%;border:1px solid rgba(178,58,44,.18);}
+    .lm-hero__ring--1{width:112%;height:112%;top:-6%;left:-6%;}
+    .lm-hero__ring--2{width:128%;height:128%;top:-14%;left:-14%;opacity:.6;}
+    .lm-hero__scroll{
+      display:flex;align-items:center;gap:10px;margin-top:52px;font-size:11.5px;
+      letter-spacing:.14em;text-transform:uppercase;color:var(--lm-subink);
+    }
+    .lm-hero__scroll span{width:26px;height:1px;background:var(--lm-subink);display:inline-block;}
+  </style>
+
+  <div class="lm-hero__inner">
+    <div data-lm-reveal>
+      <p class="lm-hero__eyebrow">{{ section.settings.eyebrow | default: 'Luméa Skin' }}</p>
+      <h1 class="lm-hero__title">
+        {% for line in (1..3) %}
+          {%- assign line_key = 'heading_line' | append: line -%}
+          {%- assign line_text = section.settings[line_key] -%}
+          {%- if line_text != blank -%}
+            <span class="lm-hero-line">{{ line_text }}</span>
+          {%- endif -%}
+        {% endfor %}
+      </h1>
+      <p class="lm-hero__sub">{{ section.settings.subtext | default: "Un rituel exfoliant visage et corps, formulé pour révéler une peau nette, lisse et lumineuse." }}</p>
+      <div class="lm-btn-row">
+        <a href="{{ lm_product_url }}" class="lm-btn lm-btn--outline">{{ section.settings.secondary_label | default: 'Découvrir le produit' }}</a>
+        <a href="{{ lm_product_url }}" class="lm-btn lm-btn--primary">{{ section.settings.primary_label | default: 'Commander maintenant' }}</a>
+      </div>
+      <div class="lm-hero__scroll"><span></span>{{ section.settings.footnote | default: 'Testé cliniquement · Visage & corps' }}</div>
+    </div>
+
+    <div class="lm-hero__visual" data-lm-reveal-scale>
+      <div class="lm-hero__stage">
+        <div class="lm-hero__ring lm-hero__ring--1"></div>
+        <div class="lm-hero__ring lm-hero__ring--2"></div>
+        {%- if section.settings.hero_image -%}
+          {{ section.settings.hero_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '480,800,1200,1400', alt: section.settings.hero_image.alt | default: 'Luméa Skin — Peel Shot' }}
+        {%- elsif lm_product.featured_image -%}
+          {{ lm_product.featured_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '480,800,1200,1400', alt: lm_product.title }}
+        {%- else -%}
+          <svg class="lm-hero__bottle-fallback" viewBox="0 0 120 240"><use href="#lm-bottle"/></svg>
+        {%- endif -%}
+        <span class="lm-hero__badge">{{ section.settings.badge_text | default: '★ 10 000+ clientes satisfaites' }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% render 'lumea-scripts' %}
+
+{% schema %}
+{
+  "name": "Lumea — Hero premium",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow / nom de marque", "default": "Luméa Skin" },
+    { "type": "text", "id": "heading_line1", "label": "Titre — ligne 1", "default": "Une peau plus lisse." },
+    { "type": "text", "id": "heading_line2", "label": "Titre — ligne 2", "default": "Plus lumineuse." },
+    { "type": "text", "id": "heading_line3", "label": "Titre — ligne 3", "default": "Plus saine." },
+    { "type": "textarea", "id": "subtext", "label": "Sous-texte", "default": "Un rituel exfoliant visage et corps, formulé pour révéler une peau nette, lisse et lumineuse." },
+    { "type": "text", "id": "primary_label", "label": "Bouton principal", "default": "Commander maintenant" },
+    { "type": "text", "id": "secondary_label", "label": "Bouton secondaire", "default": "Découvrir le produit" },
+    { "type": "text", "id": "footnote", "label": "Texte sous les boutons", "default": "Testé cliniquement · Visage & corps" },
+    { "type": "text", "id": "badge_text", "label": "Badge sur la photo", "default": "★ 10 000+ clientes satisfaites" },
+    { "type": "product", "id": "featured_product", "label": "Produit mis en avant" },
+    { "type": "image_picker", "id": "hero_image", "label": "Photo héro (remplace la photo produit par défaut)" }
+  ],
+  "presets": [{ "name": "Lumea — Hero premium" }]
+}
+{% endschema %}

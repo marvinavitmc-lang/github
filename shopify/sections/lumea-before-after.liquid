@@ -1,0 +1,104 @@
+{% render 'lumea-styles' %}
+
+<section class="lumea-premium lm-ba lm-section">
+  <style>
+    .lm-ba__head{max-width:640px;margin:0 auto 52px;text-align:center;}
+    .lm-ba__grid{display:grid;grid-template-columns:1fr;gap:28px;}
+    @media (min-width:760px){.lm-ba__grid{grid-template-columns:repeat(2,1fr);}}
+    .lm-ba-item{position:relative;}
+    .lm-ba-frame{
+      position:relative;border-radius:var(--lm-radius-lg);overflow:hidden;aspect-ratio:4/3;
+      box-shadow:var(--lm-shadow-md);background:#EFE7DA;
+    }
+    .lm-ba-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+    .lm-ba-layer--before{background:linear-gradient(160deg,#EDE3D5,#DFD2BE);}
+    .lm-ba-layer--after{background:linear-gradient(160deg,#FBF8F3,#F1E7D8);}
+    .lm-ba-tag{
+      position:absolute;top:16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+      background:rgba(255,255,255,.85);backdrop-filter:blur(6px);padding:6px 12px;border-radius:999px;z-index:3;
+    }
+    .lm-ba-tag--before{left:16px;}
+    .lm-ba-tag--after{right:16px;}
+    .lm-ba-handle{
+      position:absolute;top:0;bottom:0;width:2px;background:#fff;left:50%;transform:translateX(-50%);z-index:2;
+      box-shadow:0 0 0 1px rgba(0,0,0,.06);pointer-events:none;
+    }
+    .lm-ba-handle:before{
+      content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      width:38px;height:38px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;
+      box-shadow:var(--lm-shadow-sm);font-size:14px;color:var(--lm-ink);
+    }
+    .lm-ba-range{
+      position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:4;
+      -webkit-appearance:none;appearance:none;
+    }
+    .lm-ba-caption{margin-top:16px;font-size:13.5px;color:var(--lm-subink);text-align:center;font-weight:300;}
+  </style>
+
+  <div class="lm-container">
+    <div class="lm-ba__head" data-lm-reveal>
+      <p class="lm-eyebrow lm-center">{{ section.settings.eyebrow | default: 'Résultats' }}</p>
+      <h2 class="lm-title lm-title--lg lm-center">{{ section.settings.title | default: 'Avant / Après' }}</h2>
+      <p class="lm-lede lm-center" style="margin-left:auto;margin-right:auto;">{{ section.settings.subtitle | default: 'Faites glisser pour comparer.' }}</p>
+    </div>
+
+    <div class="lm-ba__grid">
+      {% for block in section.blocks %}
+        <div class="lm-ba-item" data-lm-reveal-scale {{ block.shopify_attributes }}>
+          <div class="lm-ba-frame" data-lm-ba>
+            <div class="lm-ba-layer lm-ba-layer--before">
+              {% if block.settings.before_image %}
+                {{ block.settings.before_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '480,720,900', class: 'lm-ba-layer', alt: 'Avant' }}
+              {% endif %}
+            </div>
+            <div class="lm-ba-layer lm-ba-layer--after" data-lm-ba-after style="clip-path:inset(0 50% 0 0);">
+              {% if block.settings.after_image %}
+                {{ block.settings.after_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '480,720,900', class: 'lm-ba-layer', alt: 'Après' }}
+              {% endif %}
+            </div>
+            <span class="lm-ba-tag lm-ba-tag--before">Avant</span>
+            <span class="lm-ba-tag lm-ba-tag--after">Après</span>
+            <div class="lm-ba-handle" data-lm-ba-handle style="left:50%;"></div>
+            <input type="range" min="0" max="100" value="50" class="lm-ba-range" data-lm-ba-range aria-label="Comparer avant / après">
+          </div>
+          {% if block.settings.caption != blank %}
+            <p class="lm-ba-caption">{{ block.settings.caption }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% render 'lumea-scripts' %}
+
+{% schema %}
+{
+  "name": "Lumea — Avant / Après",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Résultats" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Avant / Après" },
+    { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "Faites glisser pour comparer." }
+  ],
+  "blocks": [
+    {
+      "type": "comparison",
+      "name": "Comparaison",
+      "settings": [
+        { "type": "image_picker", "id": "before_image", "label": "Photo avant" },
+        { "type": "image_picker", "id": "after_image", "label": "Photo après" },
+        { "type": "text", "id": "caption", "label": "Légende", "default": "Après 1 utilisation — grain de peau affiné" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lumea — Avant / Après",
+      "blocks": [
+        { "type": "comparison", "settings": { "caption": "Après 1 utilisation — pores visiblement resserrés" } },
+        { "type": "comparison", "settings": { "caption": "Après 2 semaines — grain de peau affiné" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

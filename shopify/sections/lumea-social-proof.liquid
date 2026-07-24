@@ -1,0 +1,76 @@
+{% render 'lumea-styles' %}
+
+<section class="lumea-premium lm-proof lm-section lm-section--alt">
+  <style>
+    .lm-proof__head{max-width:640px;margin:0 auto 48px;text-align:center;}
+    .lm-proof__count{font-family:'Fraunces',serif;font-size:clamp(2rem,3.4vw,2.8rem);margin:14px 0 6px;color:var(--lm-ink);}
+    .lm-proof__grid{display:grid;grid-template-columns:1fr;gap:16px;}
+    @media (min-width:720px){.lm-proof__grid{grid-template-columns:repeat(3,1fr);}}
+    .lm-review{padding:28px;display:flex;flex-direction:column;gap:12px;}
+    .lm-review__quote{font-size:14.5px;line-height:1.65;color:var(--lm-ink);font-weight:300;margin:0;}
+    .lm-review__meta{display:flex;align-items:center;gap:10px;margin-top:6px;}
+    .lm-review__avatar{
+      width:34px;height:34px;border-radius:50%;background:var(--lm-accent-soft);color:var(--lm-accent);
+      display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:13px;font-weight:600;flex:none;
+    }
+    .lm-review__name{font-size:13px;font-weight:600;color:var(--lm-ink);}
+    .lm-review__role{font-size:11.5px;color:var(--lm-subink);}
+  </style>
+
+  <div class="lm-container">
+    <div class="lm-proof__head" data-lm-reveal>
+      <p class="lm-eyebrow lm-center">{{ section.settings.eyebrow | default: 'Avis clientes' }}</p>
+      <div class="lm-stars lm-center">★★★★★</div>
+      <p class="lm-proof__count lm-center" data-lm-count="{{ section.settings.customer_count | default: 10000 }}" data-lm-count-suffix="+">0+</p>
+      <p class="lm-lede lm-center" style="margin-left:auto;margin-right:auto;">{{ section.settings.subtitle | default: 'clientes satisfaites, visage et corps confondus.' }}</p>
+    </div>
+
+    <div class="lm-proof__grid">
+      {% for block in section.blocks %}
+        <div class="lm-review lm-card" data-lm-reveal {{ block.shopify_attributes }}>
+          <div class="lm-stars">★★★★★</div>
+          <p class="lm-review__quote">“{{ block.settings.quote }}”</p>
+          <div class="lm-review__meta">
+            <span class="lm-review__avatar">{{ block.settings.name | slice: 0 }}</span>
+            <div>
+              <div class="lm-review__name">{{ block.settings.name }}</div>
+              <div class="lm-review__role">{{ block.settings.role }}</div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lumea — Preuves sociales",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Avis clientes" },
+    { "type": "number", "id": "customer_count", "label": "Nombre de clientes", "default": 10000 },
+    { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "clientes satisfaites, visage et corps confondus." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Avis",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Avis", "default": "Ma peau n'a jamais été aussi nette. Résultat visible dès la première application." },
+        { "type": "text", "id": "name", "label": "Nom", "default": "Camille" },
+        { "type": "text", "id": "role", "label": "Précision", "default": "Cliente vérifiée" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lumea — Preuves sociales",
+      "blocks": [
+        { "type": "review", "settings": { "quote": "Ma peau n'a jamais été aussi nette. Résultat visible dès la première application.", "name": "Camille", "role": "Cliente vérifiée" } },
+        { "type": "review", "settings": { "quote": "Le duo visage et corps change tout. Grain de peau visiblement affiné.", "name": "Inès", "role": "Cliente vérifiée" } },
+        { "type": "review", "settings": { "quote": "Douce sur peau sensible, efficace sur les points noirs. Devenu un indispensable.", "name": "Sarah", "role": "Cliente vérifiée" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

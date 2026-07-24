@@ -1,0 +1,125 @@
+{
+  "sections": {
+    "lm_hero": { "type": "lumea-hero-premium", "settings": {} },
+    "lm_gallery": {
+      "type": "lumea-gallery-premium",
+      "blocks": {
+        "b1": { "type": "scene", "settings": { "scene_style": "droplets", "caption": "Fraîcheur" } },
+        "b2": { "type": "scene", "settings": { "scene_style": "stone", "caption": "Minéral" } },
+        "b3": { "type": "scene", "settings": { "scene_style": "leaf", "caption": "Riz & botanique" } },
+        "b4": { "type": "scene", "settings": { "scene_style": "sunlight", "caption": "Lumière naturelle" } },
+        "b5": { "type": "scene", "settings": { "scene_style": "bath", "caption": "Rituel quotidien" } },
+        "b6": { "type": "scene", "settings": { "scene_style": "reflection", "caption": "Éclat" } },
+        "b7": { "type": "scene", "settings": { "scene_style": "closeup", "caption": "Le packaging" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7"],
+      "settings": {}
+    },
+    "lm_benefits": {
+      "type": "lumea-benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "leaf", "title": "Exfolie en douceur", "text": "Élimine les cellules mortes sans agresser la barrière cutanée." } },
+        "b2": { "type": "benefit", "settings": { "icon": "texture", "title": "Réduit la peau granuleuse", "text": "Lisse le grain de peau, visage comme corps." } },
+        "b3": { "type": "benefit", "settings": { "icon": "feather", "title": "Peau plus douce", "text": "Une texture visiblement plus soyeuse dès la première application." } },
+        "b4": { "type": "benefit", "settings": { "icon": "shield", "title": "Convient aux peaux sensibles", "text": "Formule testée cliniquement, respectueuse de l'épiderme." } },
+        "b5": { "type": "benefit", "settings": { "icon": "drop", "title": "Hydratation", "text": "Un fini confortable, jamais tiraillé ni asséché." } },
+        "b6": { "type": "benefit", "settings": { "icon": "check", "title": "Résultats visibles", "text": "Des effets mesurables dès la première utilisation." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"],
+      "settings": {}
+    },
+    "lm_whyus": {
+      "type": "lumea-why-us",
+      "blocks": {
+        "b1": { "type": "row", "settings": { "scene_style": "white", "heading": "Une formule cliniquement testée", "text": "Chaque lot est évalué en laboratoire indépendant : -75,46% de cellules mortes, -99,30% d'impuretés des pores dès la première utilisation." } },
+        "b2": { "type": "row", "settings": { "scene_style": "stone", "heading": "Deux rituels, une seule promesse", "text": "Un sérum concentré pour le visage, une formule fluide pour le corps — pensés pour travailler ensemble, jamais l'un contre l'autre." } },
+        "b3": { "type": "row", "settings": { "scene_style": "sunlight", "heading": "Des actifs choisis, pas empilés", "text": "Acide hypochloreux et extrait de riz : deux ingrédients, sélectionnés pour leur efficacité, sans surcharge inutile." } }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": {}
+    },
+    "lm_social": {
+      "type": "lumea-social-proof",
+      "blocks": {
+        "b1": { "type": "review", "settings": { "quote": "Ma peau n'a jamais été aussi nette. Résultat visible dès la première application.", "name": "Camille", "role": "Cliente vérifiée" } },
+        "b2": { "type": "review", "settings": { "quote": "Le duo visage et corps change tout. Grain de peau visiblement affiné.", "name": "Inès", "role": "Cliente vérifiée" } },
+        "b3": { "type": "review", "settings": { "quote": "Douce sur peau sensible, efficace sur les points noirs. Devenu un indispensable.", "name": "Sarah", "role": "Cliente vérifiée" } }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": {}
+    },
+    "lm_ba": {
+      "type": "lumea-before-after",
+      "blocks": {
+        "b1": { "type": "comparison", "settings": { "caption": "Après 1 utilisation — pores visiblement resserrés" } },
+        "b2": { "type": "comparison", "settings": { "caption": "Après 2 semaines — grain de peau affiné" } }
+      },
+      "block_order": ["b1", "b2"],
+      "settings": {}
+    },
+    "lm_routine": {
+      "type": "lumea-routine",
+      "blocks": {
+        "b1": { "type": "step", "settings": { "icon": "cleanse", "title": "Nettoyer", "text": "Nettoyez la peau du visage ou du corps et séchez délicatement." } },
+        "b2": { "type": "step", "settings": { "icon": "apply", "title": "Appliquer", "text": "Appliquez sur les zones concernées, en suivant les indications de l'emballage." } },
+        "b3": { "type": "step", "settings": { "icon": "moisturize", "title": "Hydrater", "text": "Enchaînez avec votre soin hydratant habituel." } }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": {}
+    },
+    "lm_ingredients": {
+      "type": "lumea-ingredients",
+      "blocks": {
+        "b1": { "type": "ingredient", "settings": { "icon": "molecule", "name": "Acide hypochloreux", "text": "Un actif clarifiant doux qui aide à éliminer les impuretés et l'excès de sébum, sans agresser la barrière cutanée." } },
+        "b2": { "type": "ingredient", "settings": { "icon": "leaf", "name": "Extrait de riz", "latin": "Oryza Sativa", "text": "Reconnu en cosmétique coréenne pour son effet apaisant, il aide à révéler l'éclat et l'homogénéité du teint." } }
+      },
+      "block_order": ["b1", "b2"],
+      "settings": {}
+    },
+    "lm_faq": {
+      "type": "lumea-faq",
+      "blocks": {
+        "b1": { "type": "faq", "settings": { "question": "Puis-je utiliser le même flacon sur le visage et sur le corps ?", "answer": "Le coffret contient deux formules distinctes : un sérum concentré pour le visage et une formule plus fluide pensée pour les grandes surfaces du corps. Utilisez chaque flacon sur la zone à laquelle il est destiné." } },
+        "b2": { "type": "faq", "settings": { "question": "Convient-il aux peaux sensibles ?", "answer": "Comme pour tout soin exfoliant, nous recommandons un test préalable sur une petite zone et de suivre les indications de l'emballage. En cas de doute, demandez conseil à un dermatologue." } },
+        "b3": { "type": "faq", "settings": { "question": "À quel rythme l'utiliser ?", "answer": "La fréquence recommandée figure sur l'emballage du produit. Commencez progressivement pour évaluer la tolérance de votre peau." } },
+        "b4": { "type": "faq", "settings": { "question": "Sous combien de temps vais-je recevoir ma commande ?", "answer": "Les commandes sont préparées sous 24 à 48h ouvrées puis expédiées avec suivi." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {}
+    },
+    "lm_trust": {
+      "type": "lumea-trust-bar",
+      "blocks": {
+        "b1": { "type": "trust", "settings": { "icon": "truck", "label": "Livraison rapide" } },
+        "b2": { "type": "trust", "settings": { "icon": "lock", "label": "Paiement sécurisé" } },
+        "b3": { "type": "trust", "settings": { "icon": "badge", "label": "Garantie satisfaction" } },
+        "b4": { "type": "trust", "settings": { "icon": "chat", "label": "Support client" } },
+        "b5": { "type": "trust", "settings": { "icon": "check", "label": "Produit authentique" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5"],
+      "settings": {}
+    },
+    "lm_footer": {
+      "type": "lumea-footer-premium",
+      "blocks": {
+        "b1": { "type": "social", "settings": { "icon": "instagram", "label": "Instagram" } },
+        "b2": { "type": "social", "settings": { "icon": "tiktok", "label": "TikTok" } }
+      },
+      "block_order": ["b1", "b2"],
+      "settings": {}
+    }
+  },
+  "order": [
+    "lm_hero",
+    "lm_gallery",
+    "lm_benefits",
+    "lm_whyus",
+    "lm_social",
+    "lm_ba",
+    "lm_routine",
+    "lm_ingredients",
+    "lm_faq",
+    "lm_trust",
+    "lm_footer"
+  ]
+}

@@ -1,0 +1,169 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+.lumea-premium{
+  --lm-bg:#FAF7F2;
+  --lm-bg-alt:#F2EAE0;
+  --lm-surface:#FFFFFF;
+  --lm-ink:#211D19;
+  --lm-subink:#6E6459;
+  --lm-line:#E7DDD0;
+  --lm-line-soft:#EFE7DB;
+  --lm-accent:#B23A2C;
+  --lm-accent-dark:#8E2C21;
+  --lm-accent-soft:#F3E2DC;
+  --lm-radius-sm:14px;
+  --lm-radius-md:22px;
+  --lm-radius-lg:32px;
+  --lm-shadow-sm:0 2px 10px rgba(33,29,25,.05);
+  --lm-shadow-md:0 18px 44px -18px rgba(33,29,25,.22);
+  --lm-shadow-lg:0 30px 70px -24px rgba(33,29,25,.28);
+  --lm-ease:cubic-bezier(.22,.61,.36,1);
+  font-family:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  color:var(--lm-ink);
+  background:var(--lm-bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.lumea-premium *{box-sizing:border-box;}
+.lumea-premium .lm-font-display{font-family:'Fraunces',Georgia,'Times New Roman',serif;}
+.lumea-premium .lm-container{max-width:1220px;margin:0 auto;padding:0 24px;}
+@media (min-width:1000px){.lumea-premium .lm-container{padding:0 48px;}}
+
+.lumea-premium .lm-eyebrow{
+  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  color:var(--lm-accent);margin:0 0 14px;
+}
+.lumea-premium .lm-title{
+  font-family:'Fraunces',Georgia,serif;font-weight:400;letter-spacing:-.01em;
+  line-height:1.08;margin:0 0 18px;color:var(--lm-ink);
+}
+.lumea-premium .lm-title--xl{font-size:clamp(2.4rem,5.4vw,4.6rem);}
+.lumea-premium .lm-title--lg{font-size:clamp(1.9rem,3.6vw,3rem);}
+.lumea-premium .lm-title--md{font-size:clamp(1.5rem,2.6vw,2.1rem);}
+.lumea-premium .lm-lede{
+  font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.65;color:var(--lm-subink);
+  max-width:560px;margin:0 0 8px;font-weight:300;
+}
+.lumea-premium .lm-section{padding:88px 0;}
+@media (max-width:720px){.lumea-premium .lm-section{padding:56px 0;}}
+.lumea-premium .lm-section--alt{background:var(--lm-bg-alt);}
+.lumea-premium .lm-center{text-align:center;margin-left:auto;margin-right:auto;}
+
+.lumea-premium .lm-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Public Sans',sans-serif;font-size:14.5px;font-weight:600;letter-spacing:.01em;
+  padding:16px 34px;border-radius:999px;border:1px solid transparent;cursor:pointer;
+  text-decoration:none;transition:transform .35s var(--lm-ease),box-shadow .35s var(--lm-ease),background-color .3s,color .3s,border-color .3s;
+  white-space:nowrap;
+}
+.lumea-premium .lm-btn--primary{background:var(--lm-ink);color:#fff;box-shadow:var(--lm-shadow-sm);}
+.lumea-premium .lm-btn--primary:hover{background:var(--lm-accent);transform:translateY(-2px);box-shadow:var(--lm-shadow-md);}
+.lumea-premium .lm-btn--outline{background:transparent;color:var(--lm-ink);border-color:var(--lm-ink);}
+.lumea-premium .lm-btn--outline:hover{background:var(--lm-ink);color:#fff;transform:translateY(-2px);}
+.lumea-premium .lm-btn-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+
+.lumea-premium .lm-card{
+  background:var(--lm-surface);border-radius:var(--lm-radius-md);
+  border:1px solid var(--lm-line-soft);box-shadow:var(--lm-shadow-sm);
+  transition:transform .5s var(--lm-ease),box-shadow .5s var(--lm-ease);
+}
+.lumea-premium .lm-card:hover{transform:translateY(-4px);box-shadow:var(--lm-shadow-md);}
+
+.lumea-premium .lm-stars{color:var(--lm-accent);letter-spacing:2px;font-size:15px;line-height:1;}
+
+.lumea-premium [data-lm-reveal]{opacity:0;transform:translateY(28px);transition:opacity .9s var(--lm-ease),transform .9s var(--lm-ease);}
+.lumea-premium [data-lm-reveal].is-visible{opacity:1;transform:translateY(0);}
+.lumea-premium [data-lm-reveal-scale]{opacity:0;transform:scale(.94);transition:opacity 1s var(--lm-ease),transform 1s var(--lm-ease);}
+.lumea-premium [data-lm-reveal-scale].is-visible{opacity:1;transform:scale(1);}
+@media (prefers-reduced-motion:reduce){
+  .lumea-premium [data-lm-reveal],.lumea-premium [data-lm-reveal-scale]{opacity:1!important;transform:none!important;transition:none!important;}
+}
+
+.lumea-premium .lm-scene{
+  position:relative;border-radius:var(--lm-radius-lg);overflow:hidden;isolation:isolate;
+  aspect-ratio:4/5;background:linear-gradient(155deg,#FDFBF8 0%,#F4ECE1 60%,#EFE4D6 100%);
+}
+.lumea-premium .lm-scene img{width:100%;height:100%;object-fit:cover;display:block;}
+.lumea-premium .lm-scene__glow{
+  position:absolute;inset:-20%;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.9),transparent 55%);
+  pointer-events:none;
+}
+.lumea-premium .lm-scene__shadow{
+  position:absolute;left:12%;right:12%;bottom:8%;height:14%;
+  background:radial-gradient(ellipse at center,rgba(33,29,25,.16),transparent 72%);
+  filter:blur(2px);pointer-events:none;
+}
+.lumea-premium .lm-scene__bottle{
+  position:absolute;left:50%;bottom:14%;top:auto;transform:translateX(-50%);width:34%;filter:drop-shadow(0 22px 24px rgba(33,29,25,.18));
+}
+.lumea-premium .lm-scene--droplets:before,.lumea-premium .lm-scene--water:before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle at 18% 24%,rgba(255,255,255,.85) 0 3px,transparent 4px),
+    radial-gradient(circle at 72% 18%,rgba(255,255,255,.7) 0 2px,transparent 3px),
+    radial-gradient(circle at 60% 66%,rgba(255,255,255,.8) 0 4px,transparent 5px),
+    radial-gradient(circle at 30% 78%,rgba(255,255,255,.6) 0 2.5px,transparent 3.5px),
+    radial-gradient(circle at 85% 55%,rgba(255,255,255,.75) 0 3px,transparent 4px);
+  mix-blend-mode:overlay;opacity:.9;
+}
+.lumea-premium .lm-scene--stone{background:linear-gradient(160deg,#EDE6DC 0%,#DCD2C2 45%,#C9BEA9 100%);}
+.lumea-premium .lm-scene--stone:before{
+  content:"";position:absolute;inset:0;opacity:.5;mix-blend-mode:multiply;
+  background-image:repeating-linear-gradient(115deg,rgba(120,105,80,.05) 0 2px,transparent 2px 14px),
+    repeating-linear-gradient(35deg,rgba(120,105,80,.04) 0 2px,transparent 2px 18px);
+}
+.lumea-premium .lm-scene--leaf{background:linear-gradient(160deg,#F6F1E8 0%,#EDE7D8 100%);}
+.lumea-premium .lm-scene--leaf svg{position:absolute;opacity:.5;}
+.lumea-premium .lm-scene--sunlight{background:linear-gradient(155deg,#FFF9EF 0%,#F7E9D2 55%,#EFDBB8 100%);}
+.lumea-premium .lm-scene--sunlight:before{
+  content:"";position:absolute;top:-30%;left:60%;width:70%;height:160%;
+  background:linear-gradient(100deg,rgba(255,255,255,.65),transparent 55%);
+  transform:rotate(18deg);pointer-events:none;
+}
+.lumea-premium .lm-scene--bath{background:linear-gradient(165deg,#F5F2ED 0%,#E7E1D6 60%,#DCD4C6 100%);}
+.lumea-premium .lm-scene--reflection{background:linear-gradient(180deg,#F6F1E9 0%,#EEE4D4 48%,#D9CDB8 100%);}
+.lumea-premium .lm-scene--reflection:after{
+  content:"";position:absolute;left:0;right:0;bottom:0;top:52%;
+  background:linear-gradient(180deg,rgba(255,255,255,.25),rgba(255,255,255,0));
+  backdrop-filter:blur(.5px);
+}
+.lumea-premium .lm-scene--closeup{background:linear-gradient(160deg,#FFFFFF 0%,#F1E9DE 100%);}
+.lumea-premium .lm-scene-caption{
+  position:absolute;left:18px;bottom:16px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--lm-ink);background:rgba(255,255,255,.72);backdrop-filter:blur(6px);
+  padding:6px 12px;border-radius:999px;font-weight:600;
+}
+
+.lumea-premium .lm-visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+</style>
+
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <linearGradient id="lmGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="45%" stop-color="#F4D9D2"/>
+      <stop offset="100%" stop-color="#C4293D"/>
+    </linearGradient>
+    <linearGradient id="lmCap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B3330"/>
+      <stop offset="100%" stop-color="#1A1613"/>
+    </linearGradient>
+    <radialGradient id="lmShine" cx="30%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#fff" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <symbol id="lm-bottle" viewBox="0 0 120 240">
+      <ellipse cx="60" cy="230" rx="38" ry="7" fill="#000" opacity=".08"/>
+      <rect x="30" y="46" width="60" height="172" rx="20" fill="url(#lmGlass)"/>
+      <rect x="30" y="46" width="60" height="172" rx="20" fill="url(#lmShine)"/>
+      <rect x="42" y="14" width="36" height="38" rx="8" fill="url(#lmCap)"/>
+      <rect x="48" y="2" width="24" height="16" rx="5" fill="url(#lmCap)"/>
+      <rect x="38" y="96" width="44" height="54" rx="10" fill="#fff" opacity=".88"/>
+      <rect x="46" y="110" width="28" height="4" rx="2" fill="#C4293D" opacity=".7"/>
+      <rect x="46" y="120" width="20" height="3" rx="1.5" fill="#B7ADA4" opacity=".8"/>
+      <rect x="46" y="128" width="24" height="3" rx="1.5" fill="#B7ADA4" opacity=".8"/>
+    </symbol>
+  </defs>
+</svg>
